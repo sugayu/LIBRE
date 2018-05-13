@@ -1,0 +1,2 @@
+class Myword < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class LaterReading < ApplicationRecord
+end

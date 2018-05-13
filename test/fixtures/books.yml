@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  genre_id: 1
+  book_title: MyString
+  cover_img: MyText
+  status: 1
+  book_delete_flg: false
+
+two:
+  user_id: 1
+  genre_id: 1
+  book_title: MyString
+  cover_img: MyText
+  status: 1
+  book_delete_flg: false
