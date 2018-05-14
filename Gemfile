@@ -60,3 +60,8 @@ gem 'devise'
 #CSSフレームワーク
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.1.0'
+
+#画像投稿用
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+#画像加工用(サイズ変更など)
+gem "refile-mini_magick"

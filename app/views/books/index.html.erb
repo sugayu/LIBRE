@@ -1,0 +1,22 @@
+<div class=" mx-auto my-5 col-10" style="width: 1000px;">
+  <!-- お知らせ -->
+  <div class=" mx-auto my-5 col-10 notice-css">
+    <p class="notice-title">お知らせ</p>
+    <% @infos.each do |info| %>
+    <p> <%= info.info_title %> </p>
+    <% end %>
+  </div>
+  <!-- 本棚 -->
+  <div class=" mx-auto my-5 col-10 bookshelf clearfix">
+    <% @books.each do |book| %>
+    <%= link_to book_path(book) do %>
+    <div class="book-item ">
+      <%= attachment_image_tag book, :cover_img, size: '150x200' %>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+

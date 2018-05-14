@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180513065224) do
+ActiveRecord::Schema.define(version: 20180514032836) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180513065224) do
     t.integer "user_id"
     t.integer "genre_id"
     t.string "book_title"
-    t.text "cover_img"
+    t.text "cover_img_id"
     t.integer "status"
     t.boolean "book_delete_flg"
     t.datetime "created_at", null: false
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20180513065224) do
     t.string "last_sign_in_ip"
     t.integer "theme_id"
     t.string "user_name"
-    t.text "user_img"
+    t.text "user_img_id"
     t.boolean "quit_flg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
