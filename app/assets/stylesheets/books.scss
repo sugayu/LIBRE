@@ -1,0 +1,31 @@
+// Place all the styles related to the books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* お知らせ */
+.notice-title {
+  position: relative;
+  width: 120px;
+  top: -20px;
+  right: -20px;
+  background-color: white; 
+  padding: 0 20px;
+  margin-bottom: 0px;
+}
+.notice-css {
+  border: 10px solid #cccccc;
+  width: 700px ;
+  border-radius: 20px ;
+}
+
+/* 本棚 */
+.bookshelf {
+  border: 10px solid  #5b310f;
+  background-color: #351d09;
+}
+
+.book-item {
+  padding: 5px 20px;
+  float: left;
+}
+
