@@ -1,9 +1,14 @@
 <div class="mt-5 col-10 mx-auto" style="width: 100%;">
   <p><%= @book.book_title %>ーーー <%= @episode.epi_title %></p>
   <!-- 本 -->
-  <div class="mt-5 col-6 mx-auto">
+  <div class="mt-5 col-6 mx-auto book-box">
     <div class="upright">
-      <%= @scanedbody[1] %>
+      <% num1 = 10 %>
+      <% num2 = 19 %>
+
+      <% for num in num1..num2 do %>
+      <div><%= @scanedbody[num] %></div>
+      <% end %>
     </div>
   </div>
   <!-- サイドバー -->
