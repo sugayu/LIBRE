@@ -1,18 +1,29 @@
-<p><%= @user.user_name %>ーーー<%= @book.book_title %>の話一覧</p>
-<table class="table col-10 mx-auto">
+<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+  <p><%= @user.user_name %>ーーー<%= @book.book_title %>の話一覧</p>
+  <table class="table col-10 mx-auto">
 
- <thead>
-   <tr>
-     <th></th>
-   </tr>
- </thead>
+    <thead>
+      <tr>
+        <th>話数</th>
+        <th>話名</th>
+      </tr>
+    </thead>
 
- <tbody>
-   <tr>
-     <th>
-     </th>
-     <td></td>
-   </tr>
- </tbody>
+    <% count = 1 %>
+    <% @book.episodes.each do |epi| %>
+    <tbody>
+      <tr>
+        <td><%= count %></td>
+        <td>
+          <%= link_to episode_path(epi) do %>
+          <%= epi.epi_title %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+    <% count += 1 %>
+    <% end %>
 
-</table>
+  </table>
+</div>
+
