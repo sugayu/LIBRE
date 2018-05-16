@@ -1,0 +1,15 @@
+// Place all the styles related to the episodes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* 縦書きのためのCSS uprightは英数字も縦に表示する形式 */
+
+.upright {
+  width: 400px;
+  height: 600px;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  -webkit-text-orientation: upright;
+  text-orientation: upright;
+  font-size: 28px;
+}
