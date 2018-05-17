@@ -3,13 +3,24 @@
 
   <div class="mx-auto book-contents clearfix">
     <div class="page-counter"><%= @current_page %>  /  <%= @total_page %></div>
-    <!-- 一番最初のページだったら「前へ」ボタンを表示しないようにする -->
+    <!-- 一番最初のページだったら「前の話へ」ボタンを表示するようにする -->
     <% if @user_episode.progress == 0 %>
+    <!-- 本の一番最初のエピソードだったらボタンを表示させないようにする -->
+    <% if @book.id == @compared_book.id && @episode.id != 1 %>
+    <!-- 前の話へのリンク -->
+    <%= link_to previous_episode_path(@book, @episode) do%>
+    <div class="privious-episode-button"></div>
+    <%  end %>
+
+    <% else %>
     <div class="empty-button"></div>
+    <% end %>
+
     <% else %>
     <%= link_to previous_path(@book, @user_episode), method: :PATCH do%>
     <div class="previous-button"></div>
     <% end %>
+
     <% end %>
 
     <!-- 本 -->
@@ -22,9 +33,13 @@
       </div>
     </div>
 
-    <!-- 最後のページだったら次へボタンを表示させないようにする -->
+    <!-- 最後のページだったら次へボタンを次の話へボタンにする -->
     <% if @total_page == @current_page %>
-    <div class="empty-button"></div>
+
+    <%= link_to next_episode_path(@book, @episode) do%>
+    <div class="next-episode-button"></div>
+    <% end %>
+
     <% else %>
     <%= link_to next_path(@book, @user_episode), method: :PATCH do%>
     <div class="next-button"></div>
