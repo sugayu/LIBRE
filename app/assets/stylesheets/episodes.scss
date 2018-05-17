@@ -1,19 +1,38 @@
 // Place all the styles related to the episodes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.book-contents {
+  width: 600px;
+}
+
+.previous-button {
+  width: 30px;
+  float: left;
+  height: 604px;
+  background-color: red;
+}
+
+.book-box {
+  width:510px;
+  border: 1px solid;
+  float: left;
+}
+
+.next-button {
+  width: 30px;
+  float: left;
+  height: 604px;
+  background-color: green;
+}
 
 /* 縦書きのためのCSS uprightは英数字も縦に表示する形式 */
-
 .upright {
-  width: 400px;
-  height: 600px;
+  width: 16em;
+  height: 21.5em;
+  padding: 20px 0px 0px 30px;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   -webkit-text-orientation: upright;
   text-orientation: upright;
   font-size: 28px;
-}
-
-.book-box {
-  border: 1px solid;
 }

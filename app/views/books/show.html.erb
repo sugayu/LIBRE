@@ -15,7 +15,7 @@
       <tr>
         <td><%= count %></td>
         <td>
-          <%= link_to episode_path(epi) do %>
+          <%= link_to book_episode_path(@book, epi) do %>
           <%= epi.epi_title %>
           <% end %>
         </td>

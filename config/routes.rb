@@ -14,8 +14,12 @@ Rails.application.routes.draw do
   }
 
   get '/' => 'users#top', as: 'top'
+  patch '/books/:book_id/user_episodes/:id/next' => 'user_episodes#next', as: 'next'
+  patch '/books/:book_id/user_episodes/:id/previous' => 'user_episodes#previous', as: 'previous'
 
-  resources :books, only: [:index, :show]
-  resources :episodes, only: [:show]
+  resources :books, only: [:index, :show] do
+    resources :episodes, only: [:show]
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
