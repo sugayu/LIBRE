@@ -69,3 +69,6 @@ gem 'bootstrap', '~> 4.1.0'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 #画像加工用(サイズ変更など)
 gem "refile-mini_magick"
+
+#検索機能
+gem 'ransack'
