@@ -17,6 +17,7 @@ class EpisodesController < ApplicationController
     @user_episode = UserEpisode.find_by(user_id: current_user.id, episode_id: @episode.id)
 
     if @user_episode.progress == 0 && @episode.id != 1 
+      #@episode.idが１だと- 1をしたときにエラーが出るため回避させている
       #前のエピソードのidに関連づいている本のidをとってきて今見ているエピソードが一番最初のものかどうかを判別している
       previous_episode_id = @episode.id - 1
       previous_episode = Episode.find(previous_episode_id)
@@ -32,6 +33,9 @@ class EpisodesController < ApplicationController
 
     @epi_start = @user_episode.progress
     @epi_end = @epi_start + 9
+
+    #検索結果
+    @episodes = Episode.search(params[:search])
   end
 
   def next_episode
@@ -47,7 +51,6 @@ class EpisodesController < ApplicationController
     book = Book.find(params[:book_id])
     redirect_to book_episode_path(book, previous_id)
   end
-
 
   private
   def user_episode_params
