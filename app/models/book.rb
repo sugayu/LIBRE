@@ -4,8 +4,8 @@ class Book < ApplicationRecord
   belongs_to :genre
   belongs_to :user
 
-  has_many :userbooks
-  has_many :laterreads
+  has_many :user_books
+  has_many :later_reads
   has_many :mywords
   has_many :likes
   has_many :episodes

@@ -20,6 +20,11 @@
           <%= link_to destroy_user_session_path, method: :delete, class:"nav-link mx-2"  do %>
           <i class="fas fa-sign-out-alt"></i> Sign Out
           <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to books_path, class:"nav-link mx-2"  do %>
+          Books
+          <% end %>
         </li>        
         <li class="nav-item">
           <a class="nav-link text-color" href="#">Book Search</a>
@@ -66,9 +71,13 @@
         <li class="nav-item">
           <a class="nav-link text-color" href="#">Signup</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">login</a>
-        </li>        
+          <%= link_to new_user_session_path, class:"nav-link mx-2"  do %>
+          login
+          <% end %>
+        </li>  
+        
         <li class="nav-item">
           <a class="nav-link text-color" href="#">Book Search</a>
         </li>

@@ -1,17 +1,39 @@
-<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+<div>
   <p><%= @book.book_title %>ーーー <%= @episode.epi_title %></p>
-  <!-- 本 -->
-  <div class="mt-5 col-6 mx-auto book-box">
-    <div class="upright">
-      <% num1 = 10 %>
-      <% num2 = 19 %>
 
-      <% for num in num1..num2 do %>
-      <div><%= @scanedbody[num] %></div>
-      <% end %>
+  <div class="mx-auto book-contents clearfix">
+    <!-- 一番最初のページだったら「前へ」ボタンを表示しないようにする -->
+    <% if @user_episode.progress == 0 %>
+    <% else %>
+    <%= link_to previous_path(@book, @user_episode), method: :PATCH do%>
+    <div class="previous-button"></div>
+    <% end %>
+    <% end %>
+
+    <!-- 本 -->
+    <div class="book-box">
+      <div class="upright">
+        <!-- epi_startが添字の配列から２０字ずつ１０行表示 -->
+        <% for num in @epi_start..@epi_end do %>
+        <div><%= @scanedline[num] %></div>
+        <% end %>
+      </div>
     </div>
+
+    <!-- 最後のページだったら次へボタンを表示させないようにする -->
+    <% if @total_page == @current_page %>
+    <% else %>
+    <%= link_to next_path(@book, @user_episode), method: :PATCH do%>
+    <div class="next-button"></div>
+    <% end %>
+    <% end %>
+
   </div>
+
+  <%= @current_page %> / <%= @total_page %>
+
+
+
   <!-- サイドバー -->
-  <div class="mt-5 col-4 mx-auto"></div>
 
 </div>
