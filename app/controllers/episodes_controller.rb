@@ -25,17 +25,24 @@ class EpisodesController < ApplicationController
     else
       @compared_book = @episode
     end
+
     #全ページ数の計算
     @total_page = @scanedline.count / 10
-
+    total_page = @scanedline.count / 10
     #現在のページ番号
     @current_page = @user_episode.progress / 10 + 1
+
+    #読んだページのパーセント(切り上げ)
+    @percentage = (( @current_page / total_page.to_f ) * 100).ceil
 
     @epi_start = @user_episode.progress
     @epi_end = @epi_start + 9
 
+
+
+
     #検索結果
-    @episodes = Episode.search(params[:search])
+    # @episodes = Episode.search(params[:search],@book)
   end
 
   def next_episode

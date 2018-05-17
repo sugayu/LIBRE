@@ -3,7 +3,7 @@
 
   <div class="mx-auto book-contents clearfix">
     <p><%= @book.book_title %>ーーー <%= @episode.epi_title %></p>
-    <div class="page-counter"><%= @current_page %>  /  <%= @total_page %></div>
+    <div class="page-counter"><%= @current_page %>  /  <%= @total_page %>--<%= @percentage %>%</div>
     <!-- 一番最初のページだったら「前の話へ」ボタンを表示するようにする -->
     <% if @user_episode.progress == 0 %>
     <!-- 本の一番最初のエピソードだったらボタンを表示させないようにする -->
@@ -49,23 +49,23 @@
   </div>
 
   <!-- サイドバー -->
-  <div class="read-search">
+<!--   <div class="read-search">
     <h3> 検索したい言葉を入力してください。</h3>
-    <%= form_tag(book_episode_path(@book, @episode), method: :GET) do %>
+    <%#= form_tag(book_episode_path(@book, @episode), method: :GET) do %>
     <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "検索" %>
+      <%#= text_field_tag :search, params[:search] %>
+      <%#= submit_tag "検索" %>
     </p>
-    <% end %>
-  </div>
+    <%# end %>
+  </div> -->
 
   <!-- 検索結果があるかどうかによって出力を変えている -->
-  <% if @episodes.blank? %>
-  <% else %>
-  <% @episodes.each do |episode| %>
-  <%= episode.epi_body %>
-  <div style="border: 1px solid;"></div>
-  <% end %>
-  <% end %>
+  <%# if @episodes.blank? %>
+  <%# else %>
+  <%# @episodes.each do |episode| %>
+  <%#= episode.epi_body %>
+  <!-- <div style="border: 1px solid;"></div> -->
+  <%# end %>
+  <%# end %>
 
 </div>
