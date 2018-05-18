@@ -83,13 +83,12 @@
       </button>
 
       <!-- 選択している言葉をマイワードに追加する -->
-
-      <button class="circle-item" onclick="create_mywords();">
+      <div class="circle-item" >
         <div class="item-list">
-          <div class="item-icon"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
-          <div class="item-text">マイワード</div>
+          <div class="item-icon"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></div>
+          <div class="item-text">いいね!</div>
         </div>
-      </button>
+      </div>
 
       <!--  target="_blank"を入れることによって新しいタブで開いてもらっている -->
       <div class="circle-item" >
@@ -106,14 +105,36 @@
       <%= link_to book_path(@book) do%>
       <div class="circle-item">
         <div class="item-list">
-          <div class="item-icon"><i class="fa fa-undo fa-2x" aria-hidden="true"></i></i></div>
+          <div class="item-icon"><i class="fa fa-undo fa-2x" aria-hidden="true"></i></div>
           <div class="item-text">話の一覧</div>
         </div>
       </div>
       <%  end %>
-      <!-- <div class="circle-item">縦書き・横書き</div>
-      <div class="circle-item">テーマ</div>
-      <div class="circle-item">文字サイズ</div> -->
+
+      <div class="circle-item">
+        <div class="item-list">
+          <div class="item-icon"><i class="fa fa-circle fa-2x" style="color: white;" aria-hidden="true"></i></div>
+          <div class="item-text">ホワイト<br>テーマ</div>
+        </div>
+      </div>
+
+      <div class="circle-item">
+        <div class="item-list">
+          <div class="item-icon"><i class="fa fa-font fa-2x" aria-hidden="true"></i></div>
+          <div class="item-text">文字サイズ</div>
+          <div class="item-icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+        </div>
+      </div>
+
+      <div class="circle-item">
+        <div class="item-list">
+          <div class="item-icon"><i class="fa fa-font fa-2x" aria-hidden="true"></i></div>
+          <div class="item-text">文字サイズ</div>
+          <div class="item-icon"><i class="fa fa-minus" aria-hidden="true"></i></div>
+        </div>
+      </div>
+
+      <!-- <div class="circle-item">縦書き・横書き</div> -->
       
     </div>
 
