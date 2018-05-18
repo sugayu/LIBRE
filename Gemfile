@@ -72,3 +72,6 @@ gem "refile-mini_magick"
 
 #検索機能
 gem 'ransack'
+
+#アイコン
+gem 'font-awesome-rails'

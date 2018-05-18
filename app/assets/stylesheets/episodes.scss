@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.header {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 30px
+}
+
 .book-contents {
   width: 600px;
 }
@@ -59,4 +65,35 @@
   -webkit-text-orientation: upright;
   text-orientation: upright;
   font-size: 28px;
+}
+
+.my-contextmenu {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+}
+.my-contextmenu.show {
+  display: block;
+}
+
+.circle-item  {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #8CB53F; 
+  padding: 10px;
+
+  /* 上下左右の中央寄せ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* テキストの中央寄せ */
+  text-align: center;
+
+  margin: 5px 5px;
+
+  font-size: 14px;
+  color: white;
+  float: left;
 }
