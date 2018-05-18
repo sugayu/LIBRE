@@ -25,8 +25,9 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show] do
     resources :episodes, only: [:show]
-    resources :mywords, only: [:create, :destroy]
   end
+
+  resources :mywords, only: [:create, :destroy]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
