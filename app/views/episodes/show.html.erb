@@ -1,6 +1,5 @@
-<div>
-
-
+<!-- onContextmenu="return false;"これで右クリックを無効化することができます。 -->
+<div onContextmenu="return false;">
   <div class="mx-auto book-contents clearfix">
     <p><%= @book.book_title %>ーーー <%= @episode.epi_title %></p>
     <div class="page-counter"><%= @current_page %>  /  <%= @total_page %>--<%= @percentage %>%</div>
@@ -68,4 +67,41 @@
   <%# end %>
   <%# end %>
 
+  <!-- 追加の右クリック時のメニュー -->
+  <div class="my-contextmenu" id="js-contextmenu">
+    <ul>
+      <li>コピー</li>
+      <li>マイワードに追加</li>
+      <!--  target="_blank"を入れることによって新しいタブで開いてもらっている -->
+      <li><a href="https://dictionary.goo.ne.jp/srch/all/%E4%BD%9C%E5%AE%B6/m0u/" target="_blank">goo辞書で調べる</a></li>
+      <!-- 前の話へのリンク -->
+      <%= link_to book_path(@book) do%>
+      <li>話の一覧に戻る</li>
+      <%  end %>
+      <li>縦書き・横書き変更</li>
+    </ul>
+  </div>
+
+  <!-- 右クリックのメニューを変更するためのjavascript -->
+  <script type="text/javascript">
+    (function(){
+      //getElementByIdは、任意のHTMLタグで指定したIDにマッチするドキュメント要素を取得するメソッド
+      var myContextMenu = document.getElementById('js-contextmenu');
+      //無効化した右クリックのイベントをここで上書きして表示できるようにしている
+      document.body.addEventListener('contextmenu',function(e){
+        //eは右クリックした時の位置情報をとっている
+        var posX = e.pageX;
+        var posY = e.pageY;
+        myContextMenu.style.left = posX+'px';
+        myContextMenu.style.top = posY+'px';
+        myContextMenu.classList.add('show');
+      });
+      //左クリックを押したときに消えるようにしている
+      document.body.addEventListener('click',function(){
+        if(myContextMenu.classList.contains('show')) {
+          myContextMenu.classList.remove('show');
+        }
+      })
+    }());
+  </script>
 </div>
