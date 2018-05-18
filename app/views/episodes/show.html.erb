@@ -1,9 +1,11 @@
 <!-- onContextmenu="return false;"これで右クリックを無効化することができます。 -->
 <div onContextmenu="return false;">
   <div class="mx-auto book-contents clearfix">
+
     <div class="header">
       <i class="fa fa-book" aria-hidden="true"></i>&nbsp;<%= @book.book_title %>&nbsp;&nbsp;&nbsp;<i class="fa fa-list" aria-hidden="true"></i>&nbsp;<%= @episode.epi_title %>
     </div>
+
     <div class="page-counter"><%= @current_page %>ページ  / 全 <%= @total_page %>ページ中&nbsp;(&nbsp;<%= @percentage %>%&nbsp;)</div>
     <!-- 一番最初のページだったら「前の話へ」ボタンを表示するようにする -->
     <% if @user_episode.progress == 0 %>
@@ -80,12 +82,15 @@
         </div>
       </button>
 
-      <div class="circle-item">
+      <!-- 選択している言葉をマイワードに追加する -->
+
+      <button class="circle-item" onclick="create_mywords();">
         <div class="item-list">
           <div class="item-icon"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
           <div class="item-text">マイワード</div>
         </div>
-      </div>
+      </button>
+
       <!--  target="_blank"を入れることによって新しいタブで開いてもらっている -->
       <div class="circle-item" >
         <div class="item-list">
@@ -95,7 +100,6 @@
           </a>
         </div>
         <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
-        
       </div>
 
       <!-- 前の話へのリンク -->
