@@ -72,33 +72,36 @@
   <%# end %>
 
   <!-- 追加の右クリック時のメニュー -->
-  <div class="my-contextmenu" id="js-contextmenu">
+  <div class="my-contextmenu">
     <div id="circle-contents" class="clearfix">
 
-      <button class="circle-item" onclick="clipboardCopy();">
-        <div class="item-list">
-          <div class="item-icon"><i class="fa fa-clipboard fa-2x" aria-hidden="true"></i></div>
-          <div class="item-text">コピー</div>
-        </div>
-      </button>
+      <div id="selected">
+        <button class="circle-item" onclick="clipboardCopy();">
+          <div class="item-list">
+            <div class="item-icon"><i class="fa fa-clipboard fa-2x" aria-hidden="true"></i></div>
+            <div class="item-text">コピー</div>
+          </div>
+        </button>
 
-      <!-- 選択している言葉をマイワードに追加する -->
+        <!--  target="_blank"を入れることによって新しいタブで開くようにしている -->
+        <div class="circle-item" >
+          <div class="item-list">
+            <a href="https://dictionary.goo.ne.jp/srch/all/" target="_blank" onclick="dictionary_url_create(this);" onmouseout="dictionary_init_url(this);">
+              <div class="item-icon" style="color: white;"><i class="fa fa-search fa-2x" aria-hidden="true"></i></div>
+              <div class="item-text" style="color: white;">辞書</div>
+            </a>
+          </div>
+          <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
+        </div>
+      </div>
+      
+<div id="unselected">
+        <!-- 選択している言葉をマイワードに追加する -->
       <div class="circle-item" >
         <div class="item-list">
           <div class="item-icon"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></div>
           <div class="item-text">いいね!</div>
         </div>
-      </div>
-
-      <!--  target="_blank"を入れることによって新しいタブで開いてもらっている -->
-      <div class="circle-item" >
-        <div class="item-list">
-          <a href="https://dictionary.goo.ne.jp/srch/all/" target="_blank" onclick="dictionary_url_create(this);" onmouseout="dictionary_init_url(this);">
-            <div class="item-icon" style="color: white;"><i class="fa fa-search fa-2x" aria-hidden="true"></i></div>
-            <div class="item-text" style="color: white;">辞書</div>
-          </a>
-        </div>
-        <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
       </div>
 
       <!-- 前の話へのリンク -->
@@ -112,13 +115,13 @@
       <%  end %>
 
       <div class="circle-item">
-        <div class="item-list">
+        <div class="item-list ">
           <div class="item-icon"><i class="fa fa-circle fa-2x" style="color: white;" aria-hidden="true"></i></div>
           <div class="item-text">ホワイト<br>テーマ</div>
         </div>
       </div>
 
-      <div class="circle-item">
+      <!-- <div class="circle-item">
         <div class="item-list">
           <div class="item-icon"><i class="fa fa-font fa-2x" aria-hidden="true"></i></div>
           <div class="item-text">文字サイズ</div>
@@ -132,11 +135,12 @@
           <div class="item-text">文字サイズ</div>
           <div class="item-icon"><i class="fa fa-minus" aria-hidden="true"></i></div>
         </div>
-      </div>
-
+      </div> -->
       <!-- <div class="circle-item">縦書き・横書き</div> -->
-      
     </div>
+</div>
+
+
 
   </div>
 
