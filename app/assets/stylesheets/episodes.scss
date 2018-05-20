@@ -1,6 +1,16 @@
 // Place all the styles related to the episodes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#contents-black {
+  background-color: black;
+  color: white;
+  padding: 10px 0px 30px 0px;
+}
+#contents-white {
+  background-color: white;
+  color: black;
+  padding: 10px 0px 30px 0px;
+}
 
 .header {
   margin-top: 20px;
@@ -67,13 +77,6 @@
   font-size: 28px;
 }
 
-.theme.white {
-  
-}
-
-.theme.dark {
-  
-}
 /*.my-contextmenu {
   display: none;
   position: fixed;
@@ -82,35 +85,35 @@
 
 .my-contextmenu.show {
   display: block;
-}*/
+  }*/
 
-.circle-item  {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #8CB53F; 
-  padding: 10px;
+  .circle-item  {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #8CB53F; 
+    padding: 10px;
 
-  /* 上下左右の中央寄せ */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    /* 上下左右の中央寄せ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  /* テキストの中央寄せ */
-  text-align: center;
+    /* テキストの中央寄せ */
+    text-align: center;
 
-  margin: 5px 5px;
+    margin: 5px 5px;
 
-  font-size: 14px;
-  color: white;
-  float: left;
-}
+    font-size: 14px;
+    color: white;
+    float: left;
+  }
 
-#selected, #unselected {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-}
-#selected.show, #unselected.show {
-  display: block;
-}
+  #selected, #unselected {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+  }
+  #selected.show, #unselected.show {
+    display: block;
+  }

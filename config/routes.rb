@@ -23,6 +23,10 @@ Rails.application.routes.draw do
   patch '/books/:book_id/user_episodes/:id/next' => 'user_episodes#next', as: 'next'
   patch '/books/:book_id/user_episodes/:id/previous' => 'user_episodes#previous', as: 'previous'
 
+  #テーマ変更URL
+  patch '/change/white' => 'users#change_white', as: 'change_white'
+  patch '/change/black' => 'users#change_white', as: 'change_clack'
+
   resources :books, only: [:index, :show] do
     resources :episodes, only: [:show]
   end
