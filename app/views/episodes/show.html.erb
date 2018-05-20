@@ -1,149 +1,134 @@
-<!-- onContextmenu="return false;"これで右クリックを無効化することができます。 -->
-<div onContextmenu="return false;">
-  <div class="mx-auto book-contents clearfix">
+<!-- onContextmenu="return false;"これで右クリックを無効化することができる -->
+<!-- テーマidが1の時はダークテーマそれ以外の時はホワイトテーマ -->
 
-    <div class="header">
-      <i class="fa fa-book" aria-hidden="true"></i>&nbsp;<%= @book.book_title %>&nbsp;&nbsp;&nbsp;<i class="fa fa-list" aria-hidden="true"></i>&nbsp;<%= @episode.epi_title %>
-    </div>
-
-    <div class="page-counter"><%= @current_page %>ページ  / 全 <%= @total_page %>ページ中&nbsp;(&nbsp;<%= @percentage %>%&nbsp;)</div>
-    <!-- 一番最初のページだったら「前の話へ」ボタンを表示するようにする -->
-    <% if @user_episode.progress == 0 %>
-    <!-- 本の一番最初のエピソードだったらボタンを表示させないようにする -->
-    <% if @book.id == @compared_book.id && @episode.id != 1 %>
-    <!-- 前の話へのリンク -->
-    <%= link_to previous_episode_path(@book, @episode) do%>
-    <div class="privious-episode-button"></div>
-    <%  end %>
-
-    <% else %>
-    <div class="empty-button"></div>
+<% if current_user.theme_id == 1 %>
+<div id="contents-black" onContextmenu="return false;">
+  <% else %>
+  <div id="contents-white" onContextmenu="return false;">
     <% end %>
 
-    <% else %>
-    <%= link_to previous_path(@book, @user_episode), method: :PATCH do%>
-    <div class="previous-button"></div>
-    <% end %>
-
-    <% end %>
-
-    <!-- 本 -->
-    <div class="book-box">
-      <div class="upright">
-        <!-- epi_startが添字の配列から２０字ずつ１０行表示 -->
-        <% for num in @epi_start..@epi_end do %>
-        <div><%= @scanedline[num] %></div>
-        <% end %>
-      </div>
-    </div>
-
-    <!-- 最後のページだったら次へボタンを次の話へボタンにする -->
-    <% if @total_page == @current_page %>
-
-    <%= link_to next_episode_path(@book, @episode) do%>
-    <div class="next-episode-button"></div>
-    <% end %>
-
-    <% else %>
-    <%= link_to next_path(@book, @user_episode), method: :PATCH do%>
-    <div class="next-button"></div>
-    <% end %>
-    <% end %>
-  </div>
-
-  <!-- サイドバー -->
-<!--   <div class="read-search">
-    <h3> 検索したい言葉を入力してください。</h3>
-    <%#= form_tag(book_episode_path(@book, @episode), method: :GET) do %>
-    <p>
-      <%#= text_field_tag :search, params[:search] %>
-      <%#= submit_tag "検索" %>
-    </p>
-    <%# end %>
-  </div> -->
-
-  <!-- 検索結果があるかどうかによって出力を変えている -->
-  <%# if @episodes.blank? %>
-  <%# else %>
-  <%# @episodes.each do |episode| %>
-  <%#= episode.epi_body %>
-  <!-- <div style="border: 1px solid;"></div> -->
-  <%# end %>
-  <%# end %>
-
-  <!-- 追加の右クリック時のメニュー -->
-  <div class="my-contextmenu">
-    <div id="circle-contents" class="clearfix">
-
-      <div id="selected">
-        <button class="circle-item" onclick="clipboardCopy();">
-          <div class="item-list">
-            <div class="item-icon"><i class="fa fa-clipboard fa-2x" aria-hidden="true"></i></div>
-            <div class="item-text">コピー</div>
-          </div>
-        </button>
-
-        <!--  target="_blank"を入れることによって新しいタブで開くようにしている -->
-        <div class="circle-item" >
-          <div class="item-list">
-            <a href="https://dictionary.goo.ne.jp/srch/all/" target="_blank" onclick="dictionary_url_create(this);" onmouseout="dictionary_init_url(this);">
-              <div class="item-icon" style="color: white;"><i class="fa fa-search fa-2x" aria-hidden="true"></i></div>
-              <div class="item-text" style="color: white;">辞書</div>
-            </a>
-          </div>
-          <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
-        </div>
-      </div>
-      
-<div id="unselected">
-        <!-- 選択している言葉をマイワードに追加する -->
-      <div class="circle-item" >
-        <div class="item-list">
-          <div class="item-icon"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></div>
-          <div class="item-text">いいね!</div>
-        </div>
+    <div class="mx-auto book-contents clearfix">
+      <div class="header">
+        <i class="fa fa-book" aria-hidden="true"></i>&nbsp;<%= @book.book_title %>&nbsp;&nbsp;&nbsp;<i class="fa fa-list" aria-hidden="true"></i>&nbsp;<%= @episode.epi_title %>
       </div>
 
+      <div class="page-counter"><%= @current_page %>ページ  / 全 <%= @total_page %>ページ中&nbsp;(&nbsp;<%= @percentage %>%&nbsp;)</div>
+      <!-- 一番最初のページだったら「前の話へ」ボタンを表示するようにする -->
+      <% if @user_episode.progress == 0 %>
+      <!-- 本の一番最初のエピソードだったらボタンを表示させないようにする -->
+      <% if @book.id == @compared_book.id && @episode.id != 1 %>
       <!-- 前の話へのリンク -->
-      <%= link_to book_path(@book) do%>
-      <div class="circle-item">
-        <div class="item-list">
-          <div class="item-icon"><i class="fa fa-undo fa-2x" aria-hidden="true"></i></div>
-          <div class="item-text">話の一覧</div>
-        </div>
-      </div>
+      <%= link_to previous_episode_path(@book, @episode) do%>
+      <div class="privious-episode-button"></div>
       <%  end %>
 
-      <div class="circle-item">
-        <div class="item-list ">
-          <div class="item-icon"><i class="fa fa-circle fa-2x" style="color: white;" aria-hidden="true"></i></div>
-          <div class="item-text">ホワイト<br>テーマ</div>
+      <% else %>
+      <div class="empty-button"></div>
+      <% end %>
+
+      <% else %>
+      <%= link_to previous_path(@book, @user_episode), method: :PATCH do%>
+      <div class="previous-button"></div>
+      <% end %>
+
+      <% end %>
+
+      <!-- 本 -->
+      <div class="book-box">
+        <div class="upright">
+          <!-- epi_startが添字の配列から２０字ずつ１０行表示 -->
+          <% for num in @epi_start..@epi_end do %>
+          <div><%= @scanedline[num] %></div>
+          <% end %>
         </div>
       </div>
 
-      <!-- <div class="circle-item">
-        <div class="item-list">
-          <div class="item-icon"><i class="fa fa-font fa-2x" aria-hidden="true"></i></div>
-          <div class="item-text">文字サイズ</div>
-          <div class="item-icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
-        </div>
-      </div>
+      <!-- 最後のページだったら次へボタンを次の話へボタンにする -->
+      <% if @total_page == @current_page %>
 
-      <div class="circle-item">
-        <div class="item-list">
-          <div class="item-icon"><i class="fa fa-font fa-2x" aria-hidden="true"></i></div>
-          <div class="item-text">文字サイズ</div>
-          <div class="item-icon"><i class="fa fa-minus" aria-hidden="true"></i></div>
-        </div>
-      </div> -->
-      <!-- <div class="circle-item">縦書き・横書き</div> -->
+      <%= link_to next_episode_path(@book, @episode) do%>
+      <div class="next-episode-button"></div>
+      <% end %>
+
+      <% else %>
+      <%= link_to next_path(@book, @user_episode), method: :PATCH do%>
+      <div class="next-button"></div>
+      <% end %>
+      <% end %>
     </div>
-</div>
+
+    <!-- 追加の右クリック時のメニュー -->
+    <div class="my-contextmenu">
+      <div id="circle-contents" class="clearfix">
+
+        <div id="selected">
+          <button class="circle-item" onclick="clipboardCopy();">
+            <div class="item-list">
+              <div class="item-icon"><i class="fa fa-clipboard fa-3x" aria-hidden="true"></i></div>
+              <div class="item-text">コピー</div>
+            </div>
+          </button>
+
+          <!--  target="_blank"を入れることによって新しいタブで開くようにしている -->
+          <div class="circle-item" >
+            <div class="item-list">
+              <a href="https://dictionary.goo.ne.jp/srch/all/" target="_blank" onclick="dictionary_url_create(this);" onmouseout="dictionary_init_url(this);">
+                <div class="item-icon" style="color: white;"><i class="fa fa-search fa-3x" aria-hidden="true"></i></div>
+                <div class="item-text" style="color: white;">辞書</div>
+              </a>
+            </div>
+            <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
+          </div>
+        </div>
+
+        <div id="unselected">
+          <!-- 選択している言葉をマイワードに追加する -->
+          <%= link_to book_episode_likes_path(@book, @episode), method: :POST do %>
+          <div class="circle-item" >
+            <div class="item-list">
+              <div class="item-icon">
+                <i class="fa fa-heart fa-4x like-icon" aria-hidden="true" >
+                  <div class="like-count" ><%= @likes.count %></div>
+                </i>
+              </div>
+              <div class="item-text like-text">本にいいね!<br></div>
+
+            </div>
+          </div>
+          <% end %>
+
+          <!-- 前の話へのリンク -->
+          <%= link_to book_path(@book) do%>
+          <div class="circle-item">
+            <div class="item-list">
+              <div class="item-icon"><i class="fa fa-undo fa-3x" aria-hidden="true"></i></div>
+              <div class="item-text">話の一覧</div>
+            </div>
+          </div>
+          <%  end %>
 
 
+          <%= link_to change_theme_path(@book,@episode), method: :PATCH do %>
+          <% if current_user.theme_id == 1 %>
+          <div class="circle-item">
+            <div class="item-list ">
+              <div class="item-icon"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></div>
+              <div class="item-text">ホワイト<br>テーマ</div>
+            </div>
+          </div>
+          <% else %>
+          <div class="circle-item">
+            <div class="item-list ">
+              <div class="item-icon"><i class="fa fa-circle fa-3x" style="color: black;" aria-hidden="true"></i></div>
+              <div class="item-text">ダークテーマ</div>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'episodes/episodesJS' %>
 
   </div>
-
-  <%= render 'episodes/episodesJS' %>
-
-</div>

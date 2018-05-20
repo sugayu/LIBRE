@@ -38,11 +38,8 @@ class EpisodesController < ApplicationController
     @epi_start = @user_episode.progress
     @epi_end = @epi_start + 9
 
-
-
-
-    #検索結果
-    # @episodes = Episode.search(params[:search],@book)
+    #いいねの数
+    @likes = Like.where(book_id: @book.id)
   end
 
   def next_episode
