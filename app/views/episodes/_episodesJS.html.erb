@@ -6,8 +6,8 @@
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand("copy");
+    alert("「" + textarea.value + "」のコピーが完了しました！");
     textarea.parentElement.removeChild(textarea);
-    alert("コピー完了")
   }
 
   function dictionary_url_create(obj) {
@@ -23,23 +23,40 @@
 
   // 右クリックのメニューを変更するためのjavascript
   (function(){
-    //getElementByIdは、任意のHTMLタグで指定したIDにマッチするドキュメント要素を取得するメソッド
-    var myContextMenu = document.getElementById('js-contextmenu');
     //無効化した右クリックのイベントをここで上書きして表示できるようにしている
     document.body.addEventListener('contextmenu',function(e){//eは右クリックした時の位置情報をとっている
+      var SelStr = document.getSelection();//文字列を取得
+
+      //選択した文字列があるかどうかでclassにshowを追加するmycontextMenuを変えている
+      if ( String(SelStr).length == 0 ) {
+        //getElementByIdは、任意のHTMLタグで指定したIDにマッチするドキュメント要素を取得するメソッド
+        var myContextMenu = document.getElementById('unselected');
+
+        //文字列があるときに右クリック→文字列を選択しないで右クリックしても文字列があるときの右クリックメニューを削除して両方のメニューが出ないようにしている
+        var myContextMenu_selected = document.getElementById('selected');
+        myContextMenu_selected.classList.remove('show');
+      }else{
+        var myContextMenu = document.getElementById('selected');
+      }
       var posX = e.pageX;
       var posY = e.pageY;
 
       myContextMenu.style.left = posX+'px';
       myContextMenu.style.top = posY+'px';
-   
       myContextMenu.classList.add('show');
-      console.log(myContextMenu)
+
     });
-    //左クリックを押したときに消えるようにしている
+
+    //左クリックを押したときに右クリックメニューが消えるようにしている
     document.body.addEventListener('click',function(){
-      if(myContextMenu.classList.contains('show')) {
-        myContextMenu.classList.remove('show');
-      }})
+
+      var myContextMenu_unselected = document.getElementById('unselected');
+      var myContextMenu_selected = document.getElementById('selected');
+      // //文字列が選択されていない時の右クリックメニューの非表示
+      myContextMenu_unselected.classList.remove('show');
+      // //文字列が選択されている時の右クリックメニューの非表示
+      myContextMenu_selected.classList.remove('show');
+    })
+
   }());
 </script>

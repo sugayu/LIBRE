@@ -67,14 +67,22 @@
   font-size: 28px;
 }
 
-.my-contextmenu {
+.theme.white {
+  
+}
+
+.theme.dark {
+  
+}
+/*.my-contextmenu {
   display: none;
   position: fixed;
   z-index: 1000;
 }
+
 .my-contextmenu.show {
   display: block;
-}
+}*/
 
 .circle-item  {
   width: 100px;
@@ -96,4 +104,13 @@
   font-size: 14px;
   color: white;
   float: left;
+}
+
+#selected, #unselected {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+}
+#selected.show, #unselected.show {
+  display: block;
 }
