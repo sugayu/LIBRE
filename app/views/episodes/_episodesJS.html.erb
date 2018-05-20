@@ -26,21 +26,20 @@
     //getElementByIdは、任意のHTMLタグで指定したIDにマッチするドキュメント要素を取得するメソッド
     var myContextMenu = document.getElementById('js-contextmenu');
     //無効化した右クリックのイベントをここで上書きして表示できるようにしている
-    document.body.addEventListener('contextmenu',function(e){
-    //eは右クリックした時の位置情報をとっている
-    var posX = e.pageX;
-    var posY = e.pageY;
+    document.body.addEventListener('contextmenu',function(e){//eは右クリックした時の位置情報をとっている
+      var posX = e.pageX;
+      var posY = e.pageY;
 
-    myContextMenu.style.left = posX+'px';
-    myContextMenu.style.top = posY+'px';
-
-    myContextMenu.classList.add('show');
-  });
-    
-  //左クリックを押したときに消えるようにしている
-  document.body.addEventListener('click',function(){
-    if(myContextMenu.classList.contains('show')) {
-      myContextMenu.classList.remove('show');
-    }})
-}());
+      myContextMenu.style.left = posX+'px';
+      myContextMenu.style.top = posY+'px';
+   
+      myContextMenu.classList.add('show');
+      console.log(myContextMenu)
+    });
+    //左クリックを押したときに消えるようにしている
+    document.body.addEventListener('click',function(){
+      if(myContextMenu.classList.contains('show')) {
+        myContextMenu.classList.remove('show');
+      }})
+  }());
 </script>
