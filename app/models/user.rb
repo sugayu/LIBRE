@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   attachment :user_img
 
-  belongs_to :theme
+  #belongs_to :theme
   
   has_many :user_books
   has_many :later_reads

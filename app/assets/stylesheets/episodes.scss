@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #contents-black {
-  background-color: black;
-  color: white;
+  background-color: #2B3137;
+  color: #D2DFE6;
   padding: 10px 0px 30px 0px;
 }
 #contents-white {
   background-color: white;
-  color: black;
+  color: #2B3137;
   padding: 10px 0px 30px 0px;
 }
 
@@ -107,6 +107,24 @@
     font-size: 14px;
     color: white;
     float: left;
+  }
+
+  .like-icon {
+    color: pink;
+    position: relative;
+    top: 10px;
+  }
+  .like-count {
+    color: white;
+    font-size: 20px;
+    position: relative;
+    z-index: 2000px;
+    top: -38px;
+  }
+
+  .like-text {
+    position: relative;
+    top: -16px;
   }
 
   #selected, #unselected {
