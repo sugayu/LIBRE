@@ -27,14 +27,15 @@ Rails.application.routes.draw do
   
   #テーマ変更URL
   patch '/books/:book_id/episodes/:id/change/theme' => 'users#change_theme', as: 'change_theme'
+  
+  #マイワードURL
+  get '/mywords/create' => 'mywords#create', as: 'create_mywords'
 
   resources :books, only: [:index, :show] do
     resources :episodes, only: [:show] do
       resources :likes, only: [:create, :destroy]
     end
   end
-
-  resources :mywords, only: [:create, :destroy]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

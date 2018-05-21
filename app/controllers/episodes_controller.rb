@@ -11,6 +11,10 @@ class EpisodesController < ApplicationController
     end
 
     @book = @episode.book
+    
+    #マイワード機能を追加するにあたりコントローラで必要なため用意する
+    gon.book_id = @book.id
+
     body = @episode.epi_body
     @scanedline = body.scan(/.{1,#{20}}/)#200文字として1回とすると改行がある時点で次の配列に行ってしまう
 
@@ -40,6 +44,13 @@ class EpisodesController < ApplicationController
 
     #いいねの数
     @likes = Like.where(book_id: @book.id)
+
+    if Like.exists?(user_id: current_user.id, book_id: @book.id)
+      #ユーザーがすでにいいねしていたらいいねを取り消すために該当するLikeのidをとって置く必要がある
+      @user_like = Like.find_by(user_id: current_user.id, book_id: @book.id)
+    else
+      #ユーザーがいいねしていので該当するLikeのidをとって置く必要がない
+    end
   end
 
   def next_episode

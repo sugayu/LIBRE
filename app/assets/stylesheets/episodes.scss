@@ -116,15 +116,20 @@
   }
   .like-count {
     color: white;
-    font-size: 20px;
+    font-size: 17px;
     position: relative;
     z-index: 2000px;
-    top: -38px;
+    top: -30px;
+  }
+
+  .like-cancel-text {
+    position: relative;
+    top: -16px;
   }
 
   .like-text {
     position: relative;
-    top: -16px;
+    top: -10px;
   }
 
   #selected, #unselected {

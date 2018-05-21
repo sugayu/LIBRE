@@ -21,6 +21,29 @@
     obj.href = "https://dictionary.goo.ne.jp/srch/all/";
   }
 
+  //マイワードに追加
+  function add_mywords(){
+    var SelStr = document.getSelection();
+    console.log("/books/"+ gon.book_id  +"/mywords");
+
+    console.log(String(SelStr));
+
+    $.ajax({
+      url: "/mywords/create",
+      type: "GET",
+      data: {selected : String(SelStr), book_id : gon.book_id},
+      datatype: "html",
+      success: function(data){
+        //成功時の処理
+        alert("「" + String(SelStr) + "」をマイワードに追加しました");
+      },
+      error: function(data){
+        //失敗時の処理
+        alert("マイワードに追加できませんでした");
+      }
+    });
+  }
+
   //ページが表示されたときに呼ばれているjacvascript
   (function(){
     //// 右クリックのメニューを変更するためのjavascript
@@ -33,11 +56,15 @@
         //getElementByIdは、任意のHTMLタグで指定したIDにマッチするドキュメント要素を取得するメソッド
         var myContextMenu = document.getElementById('unselected');
 
-        //文字列があるときに右クリック→文字列を選択しないで右クリックしても文字列があるときの右クリックメニューを削除して両方のメニューが出ないようにしている
+        //文字列があるときに右クリック→文字列を選択しないで右クリックしても文字列があるときの右クリックメニューを削除して両方のメニューが同時に出ないようにしている
         var myContextMenu_selected = document.getElementById('selected');
         myContextMenu_selected.classList.remove('show');
       }else{
         var myContextMenu = document.getElementById('selected');
+        
+        //選択している文字列がないときに右クリック→右クリックしても文字列がないときの右クリックメニューを削除して両方のメニューが同時に出ないようにしている
+        var myContextMenu_unselected = document.getElementById('unselected');
+        myContextMenu_unselected.classList.remove('show');
       }
       var posX = e.pageX;
       var posY = e.pageY;

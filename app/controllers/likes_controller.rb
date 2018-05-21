@@ -5,4 +5,11 @@ class LikesController < ApplicationController
     episode = Episode.find(params[:episode_id])
     redirect_to book_episode_path(book, episode)
   end
+
+  def destroy
+    like = Like.destroy(params[:id])
+    book = Book.find(params[:book_id])
+    episode = Episode.find(params[:episode_id])
+    redirect_to book_episode_path(book, episode)
+  end
 end
