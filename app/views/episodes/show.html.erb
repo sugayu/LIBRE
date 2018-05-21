@@ -79,56 +79,80 @@
             </div>
             <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
           </div>
-        </div>
 
-        <div id="unselected">
-          <!-- 選択している言葉をマイワードに追加する -->
-          <%= link_to book_episode_likes_path(@book, @episode), method: :POST do %>
-          <div class="circle-item" >
+          <!-- マイワードに追加機能 -->
+          <button class="circle-item" onclick="add_mywords();" >
             <div class="item-list">
-              <div class="item-icon">
-                <i class="fa fa-heart fa-4x like-icon" aria-hidden="true" >
-                  <div class="like-count" ><%= @likes.count %></div>
-                </i>
-              </div>
-              <div class="item-text like-text">本にいいね!<br></div>
+               <div class="item-icon" style="color: white;"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>
+               <div class="item-text" style="color: white;">マイワード</div>
+           </div>
+         </button>
 
-            </div>
-          </div>
-          <% end %>
+       </div>
 
-          <!-- 前の話へのリンク -->
-          <%= link_to book_path(@book) do%>
-          <div class="circle-item">
-            <div class="item-list">
-              <div class="item-icon"><i class="fa fa-undo fa-3x" aria-hidden="true"></i></div>
-              <div class="item-text">話の一覧</div>
+       <div id="unselected">
+        <% if Like.exists?(book_id: @book.id, user_id: current_user.id) %>
+        <!-- 読んでいる本をいいねから削除する -->
+        <%= link_to book_episode_like_path(@book, @episode, @user_like), method: :DELETE do %>
+        <div class="circle-item" >
+          <div class="item-list">
+            <div class="item-icon">
+              <i class="fa fa-heart fa-3x like-icon" aria-hidden="true" >
+                <div class="like-count" ><%= @likes.count %></div>
+              </i>
             </div>
+            <div class="item-text like-cancel-text">いいね！<br>取り消し</div>
           </div>
-          <%  end %>
-
-
-          <%= link_to change_theme_path(@book,@episode), method: :PATCH do %>
-          <% if current_user.theme_id == 1 %>
-          <div class="circle-item">
-            <div class="item-list ">
-              <div class="item-icon"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></div>
-              <div class="item-text">ホワイト<br>テーマ</div>
-            </div>
-          </div>
-          <% else %>
-          <div class="circle-item">
-            <div class="item-list ">
-              <div class="item-icon"><i class="fa fa-circle fa-3x" style="color: black;" aria-hidden="true"></i></div>
-              <div class="item-text">ダークテーマ</div>
-            </div>
-          </div>
-          <% end %>
-          <% end %>
         </div>
+        <% end %>
+        <% else %>
+        <!-- 読んでいる本をいいねに追加する -->
+        <%= link_to book_episode_likes_path(@book, @episode), method: :POST do %>
+        <div class="circle-item" >
+          <div class="item-list">
+            <div class="item-icon">
+              <i class="fa fa-heart fa-3x like-icon" aria-hidden="true", style="color: white;" >
+                <div class="like-count", style="color: red;" ><%= @likes.count %></div>
+              </i>
+            </div>
+            <div class="item-text like-text">いいね！<br></div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+
+        <!-- 前の話へのリンク -->
+        <%= link_to book_path(@book) do%>
+        <div class="circle-item">
+          <div class="item-list">
+            <div class="item-icon"><i class="fa fa-undo fa-3x" aria-hidden="true"></i></div>
+            <div class="item-text">話の一覧</div>
+          </div>
+        </div>
+        <%  end %>
+
+
+        <%= link_to change_theme_path(@book,@episode), method: :PATCH do %>
+        <% if current_user.theme_id == 1 %>
+        <div class="circle-item">
+          <div class="item-list ">
+            <div class="item-icon"><i class="fa fa-circle fa-3x" style="color: white;" aria-hidden="true"></i></div>
+            <div class="item-text">ホワイト<br>テーマ</div>
+          </div>
+        </div>
+        <% else %>
+        <div class="circle-item">
+          <div class="item-list ">
+            <div class="item-icon"><i class="fa fa-circle fa-3x" style="color: black;" aria-hidden="true"></i></div>
+            <div class="item-text">ダークテーマ</div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
       </div>
     </div>
-
-    <%= render 'episodes/episodesJS' %>
-
   </div>
+
+  <%= render 'episodes/episodesJS' %>
+
+</div>

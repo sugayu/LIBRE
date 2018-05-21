@@ -75,3 +75,7 @@ gem 'ransack'
 
 #アイコン
 gem 'font-awesome-rails'
+
+#RailsアプリケーションとJavascriptの連携
+#これを使うとcontroller内でセットした変数をJavascript内で使う事ができる
+gem 'gon'
