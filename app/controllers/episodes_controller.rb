@@ -11,9 +11,6 @@ class EpisodesController < ApplicationController
     end
 
     @book = @episode.book
-    
-    #マイワード機能を追加するにあたりコントローラで必要なため用意する
-    gon.book_id = @book.id
 
     body = @episode.epi_body
     @scanedline = body.scan(/.{1,#{20}}/)#200文字として1回とすると改行がある時点で次の配列に行ってしまう
@@ -32,7 +29,7 @@ class EpisodesController < ApplicationController
 
     #全ページ数の計算
     @total_page = @scanedline.count / 10
-    total_page = @scanedline.count / 10
+    total_page = @scanedline.count / 10#@percentageを出すために必要
     #現在のページ番号
     @current_page = @user_episode.progress / 10 + 1
 
@@ -51,6 +48,18 @@ class EpisodesController < ApplicationController
     else
       #ユーザーがいいねしていので該当するLikeのidをとって置く必要がない
     end
+
+    ##javascript内で使うための変数(gonというgemを使っている)
+    #右矢印、左矢印でページを遷移できるようにするために用意する
+    gon.user_episode_id = @user_episode.id
+    #マイワード機能を追加するにあたりコントローラで必要なため用意する
+    gon.book_id = @book.id
+    #エピソードの詳細画面で次のページに行く時に必要
+    gon.total_page = @total_page
+    gon.current_page = @current_page
+    gon.user_episode_progress = @user_episode.progress
+    gon.compared_book_id = @compared_book.id
+    gon.episode_id = @episode.id
   end
 
   def next_episode
