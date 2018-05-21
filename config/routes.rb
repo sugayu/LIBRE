@@ -22,13 +22,12 @@ Rails.application.routes.draw do
   #ページ切り替え時のURL
   patch '/books/:book_id/user_episodes/:id/next' => 'user_episodes#next', as: 'next'
   patch '/books/:book_id/user_episodes/:id/previous' => 'user_episodes#previous', as: 'previous'
-
-  #ライク
   
   #テーマ変更URL
   patch '/books/:book_id/episodes/:id/change/theme' => 'users#change_theme', as: 'change_theme'
-  
+
   #マイワードURL
+  #HTTPメソッドがgetではなくpostが本来は正しいがAjaxでactionを呼ぶときにgetじゃないとエラーになってしまうためgetを使っている
   get '/mywords/create' => 'mywords#create', as: 'create_mywords'
 
   resources :books, only: [:index, :show] do

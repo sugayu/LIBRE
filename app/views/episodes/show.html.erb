@@ -18,7 +18,7 @@
       <!-- 本の一番最初のエピソードだったらボタンを表示させないようにする -->
       <% if @book.id == @compared_book.id && @episode.id != 1 %>
       <!-- 前の話へのリンク -->
-      <%= link_to previous_episode_path(@book, @episode) do%>
+      <%= link_to previous_episode_path(@book, @episode), id: "previous_episode" do%>
       <div class="privious-episode-button"></div>
       <%  end %>
 
@@ -27,7 +27,7 @@
       <% end %>
 
       <% else %>
-      <%= link_to previous_path(@book, @user_episode), method: :PATCH do%>
+      <%= link_to previous_path(@book, @user_episode), method: :PATCH, id: "previous_page" do%>
       <div class="previous-button"></div>
       <% end %>
 
@@ -46,18 +46,18 @@
       <!-- 最後のページだったら次へボタンを次の話へボタンにする -->
       <% if @total_page == @current_page %>
 
-      <%= link_to next_episode_path(@book, @episode) do%>
+      <%= link_to next_episode_path(@book, @episode), id: "next_episode" do%>
       <div class="next-episode-button"></div>
       <% end %>
 
       <% else %>
-      <%= link_to next_path(@book, @user_episode), method: :PATCH do%>
+      <%= link_to next_path(@book, @user_episode), method: :PATCH, id: "next_page" do%>
       <div class="next-button"></div>
       <% end %>
       <% end %>
     </div>
 
-    <!-- 追加の右クリック時のメニュー -->
+    <!-- 右クリック時のメニュー -->
     <div class="my-contextmenu">
       <div id="circle-contents" class="clearfix">
 
@@ -101,7 +101,7 @@
                 <div class="like-count" ><%= @likes.count %></div>
               </i>
             </div>
-            <div class="item-text like-cancel-text">いいね！<br>取り消し</div>
+            <div class="item-text like-cancel-text">取り消し</div>
           </div>
         </div>
         <% end %>

@@ -24,13 +24,10 @@
   //マイワードに追加
   function add_mywords(){
     var SelStr = document.getSelection();
-    console.log("/books/"+ gon.book_id  +"/mywords");
-
-    console.log(String(SelStr));
 
     $.ajax({
       url: "/mywords/create",
-      type: "GET",
+      type: "GET",//本当はPOSTが正しいがPOSTだとエラーが出てしまうためGETにしている
       data: {selected : String(SelStr), book_id : gon.book_id},
       datatype: "html",
       success: function(data){
@@ -44,8 +41,35 @@
     });
   }
 
+  //関数
+
   //ページが表示されたときに呼ばれているjacvascript
   (function(){
+    //矢印キーで本をめくれるようにした連続で押しすぎると予期しない挙動になってしまう。（最後のページの時の挙動が書かれていない）
+    $('html').keydown(function(e){
+      switch(e.which){
+        case 39: // Key[→]
+        console.log("右")
+        if (gon.total_page == gon.current_page) {
+          document.getElementById("next_episode").click();
+        } else {
+          document.getElementById("next_page").click();
+        }
+        break;
+
+        case 37: // Key[←]
+        console.log("左")
+        if (gon.user_episode_progress == 0) {
+          if (gon.book_id == gon.compared_book_id && gon.episode_id != 1) {
+            document.getElementById("previous_episode").click();
+          }
+        } else {
+          document.getElementById("previous_page").click();
+        }
+        break;
+      }
+    });
+
     //// 右クリックのメニューを変更するためのjavascript
     //無効化した右クリックのイベントをここで上書きして表示できるようにしている
     document.body.addEventListener('contextmenu',function(e){//eは右クリックした時の位置情報をとっている
@@ -77,7 +101,6 @@
 
     //左クリックを押したときに右クリックメニューが消えるようにしている
     document.body.addEventListener('click',function(){
-
       var myContextMenu_unselected = document.getElementById('unselected');
       var myContextMenu_selected = document.getElementById('selected');
       // //文字列が選択されていない時の右クリックメニューの非表示
