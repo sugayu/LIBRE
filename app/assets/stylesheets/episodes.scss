@@ -77,66 +77,90 @@
   font-size: 28px;
 }
 
-/*.my-contextmenu {
+.circle-item  {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #8CB53F; 
+  padding: 10px;
+
+  /* 上下左右の中央寄せ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* テキストの中央寄せ */
+  text-align: center;
+
+  margin: 5px 5px;
+
+  font-size: 14px;
+  color: white;
+  float: left;
+}
+
+.like-icon {
+  color: pink;
+  position: relative;
+  top: 10px;
+}
+.like-count {
+  color: white;
+  font-size: 17px;
+  position: relative;
+  z-index: 2000px;
+  top: -30px;
+}
+
+.like-cancel-text {
+  position: relative;
+  top: -16px;
+}
+
+.like-text {
+  position: relative;
+  top: -10px;
+}
+
+#selected, #unselected {
   display: none;
   position: fixed;
   z-index: 1000;
 }
-
-.my-contextmenu.show {
+#selected.show, #unselected.show {
   display: block;
-  }*/
+}
 
-  .circle-item  {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #8CB53F; 
-    padding: 10px;
 
-    /* 上下左右の中央寄せ */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#contents {
+  z-index: 0;
+  font-size: 16px;
+}
+.page-txt {
+  margin: 30px 0 0;
+  height: 2000px;
+}
 
-    /* テキストの中央寄せ */
-    text-align: center;
-
-    margin: 5px 5px;
-
-    font-size: 14px;
-    color: white;
-    float: left;
-  }
-
-  .like-icon {
-    color: pink;
-    position: relative;
-    top: 10px;
-  }
-  .like-count {
-    color: white;
-    font-size: 17px;
-    position: relative;
-    z-index: 2000px;
-    top: -30px;
-  }
-
-  .like-cancel-text {
-    position: relative;
-    top: -16px;
-  }
-
-  .like-text {
-    position: relative;
-    top: -10px;
-  }
-
-  #selected, #unselected {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-  }
-  #selected.show, #unselected.show {
-    display: block;
-  }
+/* モーダル コンテンツエリア */
+#modal-dictionary {
+  display: none;
+  width: 850px;
+  height: 400px;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #666666;
+  position:fixed;
+  z-index: 2;
+}
+/* モーダル 背景エリア */
+#modal-bg {
+  display:none;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.5);
+  position:fixed;
+  top:0;
+  left:0;
+  z-index: 1;
+}
