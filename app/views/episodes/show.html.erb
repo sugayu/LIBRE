@@ -7,6 +7,8 @@
   <div id="contents-white" onContextmenu="return false;">
     <% end %>
 
+    <iframe src="" id="modal-dictionary"></iframe>
+
     <div class="mx-auto book-contents clearfix">
       <div class="header">
         <i class="fa fa-book" aria-hidden="true"></i>&nbsp;<%= @book.book_title %>&nbsp;&nbsp;&nbsp;<i class="fa fa-list" aria-hidden="true"></i>&nbsp;<%= @episode.epi_title %>
@@ -69,22 +71,20 @@
             </div>
           </button>
 
-          <!--  target="_blank"を入れることによって新しいタブで開くようにしている -->
-          <div class="circle-item" >
+
+          <button class="circle-item" id="modal-dictionary-open" >
             <div class="item-list">
-              <a href="https://dictionary.goo.ne.jp/srch/all/" target="_blank" onclick="dictionary_url_create(this);" onmouseout="dictionary_init_url(this);">
-                <div class="item-icon" style="color: white;"><i class="fa fa-search fa-3x" aria-hidden="true"></i></div>
-                <div class="item-text" style="color: white;">辞書</div>
-              </a>
+              <div class="item-icon" style="color: white;"><i class="fa fa-search fa-3x" aria-hidden="true"></i></div>
+              <div class="item-text" style="color: white;">辞書</div>
             </div>
             <!-- カーソルが外れたときに辞書URLを初期化して何度でも連続して検索できるようにエラーを回避している -->
-          </div>
+          </button>
 
           <!-- マイワードに追加機能 -->
           <button class="circle-item" onclick="add_mywords();" >
             <div class="item-list">
-               <div class="item-icon" style="color: white;"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>
-               <div class="item-text" style="color: white;">マイワード</div>
+             <div class="item-icon" style="color: white;"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>
+             <div class="item-text" style="color: white;">マイワード</div>
            </div>
          </button>
 

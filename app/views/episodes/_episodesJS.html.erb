@@ -10,17 +10,6 @@
     textarea.parentElement.removeChild(textarea);
   }
 
-  function dictionary_url_create(obj) {
-    var SelStr = document.getSelection();
-    //辞書URL作成
-    obj.href = obj.href + SelStr + "/m0u/";
-  }
-
-  //辞書URL初期化
-  function dictionary_init_url(obj) {
-    obj.href = "https://dictionary.goo.ne.jp/srch/all/";
-  }
-
   //マイワードに追加
   function add_mywords(){
     var SelStr = document.getSelection();
@@ -40,8 +29,6 @@
       }
     });
   }
-
-  //関数
 
   //ページが表示されたときに呼ばれているjacvascript
   (function(){
@@ -108,6 +95,50 @@
       // //文字列が選択されている時の右クリックメニューの非表示
       myContextMenu_selected.classList.remove('show');
     })
-
   }());
+
+  //modal
+  $(function(){
+  //辞書をクリックしたら
+  $("#modal-dictionary-open").click(function(){
+    var SelStr = document.getSelection();
+    //辞書URL作成
+    document.getElementById("modal-dictionary").src="https://dictionary.goo.ne.jp/srch/all/" + String(SelStr) + "/m0u/";
+      //body内の最後に<div id="modal-bg"></div>を挿入
+      $("body").append('<div id="modal-bg"></div>');
+    //画面中央を計算する関数を実行
+    modalResize();
+
+    //モーダルウィンドウを表示
+    $("#modal-bg,#modal-dictionary").fadeIn("slow");
+
+    //画面のどこかをクリックしたらモーダルを閉じる
+    $("#modal-bg,#modal-dictionary").click(function(){
+      $("#modal-dictionary,#modal-bg").fadeOut("slow",function(){
+         //挿入した<div id="modal-bg"></div>を削除
+         $('#modal-bg').remove() ;
+       });
+
+    });
+
+    //画面の左上からmodal-dictionaryの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+    $(window).resize(modalResize);
+    function modalResize(){
+      var w = $(window).width();
+      var h = $(window).height();
+
+      var cw = $("#modal-dictionary").outerWidth();
+      var ch = $("#modal-dictionary").outerHeight();
+
+        //取得した値をcssに追加する
+        $("#modal-dictionary").css({
+          "left": ((w - cw)/2) + "px",
+          "top": ((h - ch)/2) + "px"
+        });
+      }
+    });
+});
 </script>
+
+</body>
+</html>

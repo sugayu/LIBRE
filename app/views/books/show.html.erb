@@ -1,29 +1,28 @@
 <div class="mt-5 col-10 mx-auto" style="width: 100%;">
-  <p><%= @user.user_name %>ーーー<%= @book.book_title %>の話一覧</p>
-  <table class="table col-10 mx-auto">
-
-    <thead>
-      <tr>
-        <th>話数</th>
-        <th>話名</th>
-      </tr>
-    </thead>
-
+  <p><i class="fa fa-user" aria-hidden="true"></i><%= @user.user_name %>ーーー<%= @book.book_title %>の話一覧</p>
+  <div class="spine-contents clearfix">
     <% count = 1 %>
     <% @book.episodes.each do |epi| %>
-    <tbody>
-      <tr>
-        <td><%= count %></td>
-        <td>
-          <%= link_to book_episode_path(@book, epi) do %>
-          <%= epi.epi_title %>
-          <% end %>
-        </td>
-      </tr>
-    </tbody>
-    <% count += 1 %>
-    <% end %>
+    <div class="episode-number">
+      第 <%= count %> 話
+    </div>
 
-  </table>
+    <%= link_to book_episode_path(@book, epi) do %>
+    <div class="spine-item">
+      <div class="spine-image">
+        <%= image_tag('green_back.png', :size => "100x400") %>
+      </div>
+    </div>
+
+    <% count += 1 %>
+
+    <% end %>
+    <div class="spine-episode-name">
+      <%= epi.epi_title %>
+    </div>
+    <% end %>
+  </div>
+
 </div>
+
 

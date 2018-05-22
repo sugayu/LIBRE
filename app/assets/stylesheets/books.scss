@@ -29,3 +29,27 @@
   float: left;
 }
 
+/* 背表紙 */
+.spine-item {
+  float: left;
+}
+
+.spine-episode-name {
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  -webkit-text-orientation: upright;
+  text-orientation: upright;
+  font-size: 28px;
+}
+
+.spine-episode-name {
+  position: relative;
+  z-index: 100;
+  float: left;
+}
+
+.episode-number {
+  position: relative;
+  z-index: 100;
+  float: left;
+}
