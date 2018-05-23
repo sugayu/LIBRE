@@ -1,0 +1,75 @@
+<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+  <h1><i class="fa fa-user-circle" aria-hidden="true"></i><%= current_user.user_name %>のマイページ</h1>
+  <div class="info-box clearfix">
+    <h2 class="info">Info</h2>
+
+    <div class="user-image-box">
+
+      <div class="user-image">
+        <%= attachment_image_tag current_user, :user_img, size: '300x300' %>
+      </div>
+
+    </div>
+    <h2 class="user-book-continue-number">連載中の本の数：<%= @continue_books.count %>冊</h2>
+    <h2 class="user-book-finish-number">完結済の本の数：<%= @finish_books.count %>冊</h2>
+
+  </div>
+
+  <%= link_to mybook_path do %>
+  <button type="button" class="btn btn-success btn-lg btn-block">
+    <i class="fa fa-book fa-2x" aria-hidden="true"></i>
+  </button>
+  <% end %>
+
+  <button type="button" class="btn btn-secondary btn-lg btn-block" style="  margin-top: 0px;"><i class="fa fa-wrench fa-2x" aria-hidden="true"></i></button>
+
+  <ul class="nav nav-tabs nav-items" id="myTab" role="tablist">
+
+    <li class="nav-item">
+      <a class="nav-link active" id="myword-tab" data-toggle="tab" href="#myword" role="tab" aria-controls="myword" aria-selected="false"><i class="fa fa-paperclip" aria-hidden="true"></i>マイワード</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="true"><i class="fa fa-heart" aria-hidden="true" style="color: pink;"></i>いいね</a>
+    </li>
+
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade show active" id="myword" role="tabpanel" aria-labelledby="myword-tab">
+      <table class="table table-bordered myword-table">
+        <thead >
+          <tr>
+            <th>引用した本</th>
+            <th>マイワード</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @mywords.each do |myword| %>
+          <tr>
+            <th>
+              <%= attachment_image_tag myword.book, :cover_img, size: '150x200' %>
+            </th>
+            <td> <%= myword.word %> </td>
+            <td>
+              <button type="button" class="btn btn-danger">マイワードから削除</button>
+            </td>
+          </tr>
+
+          <% end %>
+        </tbody>
+
+      </table>
+      <%= paginate @mywords %>
+    </div>
+
+    <div class="tab-pane fade" id="like" role="tabpanel" aria-labelledby="like-tab">
+      <% @likes.each do |like| %>
+      <%= attachment_image_tag like.book, :cover_img, size: '150x200' %>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

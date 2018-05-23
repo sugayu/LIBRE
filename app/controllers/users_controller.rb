@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def top
 
   end
+
   def change_theme
     if current_user.theme_id == 1
       current_user.theme_id = 2
@@ -12,6 +13,21 @@ class UsersController < ApplicationController
     book = Book.find(params[:book_id])
     episode = Episode.find(params[:id])
     redirect_to book_episode_path(book, episode)
+  end
+
+  def show
+    #連載中の本の数
+    @continue_books = current_user.books.where(status: 1)
+
+    #完結済の本の数
+    @finish_books = current_user.books.where(status: 0)
+
+    @mywords = current_user.mywords.page(params[:page]).per(2)
+    @likes = current_user.likes
+  end
+
+  def mybook
+    @user_books = current_user.books
   end
 
   private

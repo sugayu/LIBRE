@@ -17,7 +17,7 @@ Infomation.create(:admin_id => 1, :info_title => "クローズドβテストに�
 Theme.create(:theme_name => "black", :text_color => "white", :background_color => "black")
 
 #ユーザー１
-User.create(:theme_id => 1, :user_name => "夏目漱石", :email => "1@cp.com", :password => "111111", :user_img_id => nil, :quit_flg => 0)
+User.create(:theme_id => 1, :user_name => "夏目漱石", :email => "1@cp.com", :password => "111111", :user_img => File.open("./app/assets/images/natume.jpg"), :quit_flg => 0)
 #ジャンル１
 Genre.create(:genre_name => "近代文学")
 
@@ -80,7 +80,7 @@ Episode.create(:book_id => 2, :epi_title => "４話",
  ")
 
 #ユーザー２
-User.create(:theme_id => 1, :user_name => "坂本龍馬", :email => "2@cp.com", :password => "111111", :user_img_id => nil, :quit_flg => 0)
+User.create(:theme_id => 1, :user_name => "坂本龍馬", :email => "2@cp.com", :password => "111111", :user_img => File.open("./app/assets/images/ryouma.png"), :quit_flg => 0)
 ##本３
 Book.create(:user_id => 2,:genre_id => 1, :book_title => "坂本龍馬手記", :cover_img => File.open("./app/assets/images/sakamoto.jpg"), :status => 1, :book_delete_flg => 0 )
 #本３のエピソード１

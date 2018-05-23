@@ -19,9 +19,20 @@
     <a class="navbar-brand text-color" href="#">LIBRE</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
+        
+        <li class="nav-item " style="color: white;">
+          <%= current_user.user_name %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to mypage_path class:"nav-link mx-2"  do %>
+           My Page
+          <% end %>
+        </li>
+
         <li class="nav-item">
           <%= link_to destroy_user_session_path, method: :delete, class:"nav-link mx-2"  do %>
-          <i class="fas fa-sign-out-alt"></i> Sign Out
+           Sign Out
           <% end %>
         </li>
         <li class="nav-item">
@@ -30,10 +41,10 @@
           <% end %>
         </li>        
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">Book Search</a>
+          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i>Book</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">Author Search</a>
+          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i>Author</a>
         </li>
       </ul>
     </div>

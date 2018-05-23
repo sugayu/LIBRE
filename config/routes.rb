@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'episodes/edit'
+
+  get 'books/edit'
+
+  get 'books/new'
+
+  get 'episodes/new'
+
+  get 'users/mybook'
+
+  get 'users/show'
+
   ###########Adminルーティング###########
   devise_for :admins, only: [:sign_in, :sign_out, :session],
   :controllers => {
@@ -30,11 +42,18 @@ Rails.application.routes.draw do
   #HTTPメソッドがgetではなくpostが本来は正しいがAjaxでactionを呼ぶときにgetじゃないとエラーになってしまうためgetを使っている
   get '/mywords/create' => 'mywords#create', as: 'create_mywords'
 
-  resources :books, only: [:index, :show] do
-    resources :episodes, only: [:show] do
+  #マイページURL
+  get '/mypage' => 'users#show', as: 'mypage'
+
+  #マイブックURL
+  get '/mybook' => 'users#mybook', as: 'mybook'
+
+  resources :books, only: [:index, :show, :new, :create, :edit] do
+    resources :episodes, only: [:show, :new, :create, :edit] do
       resources :likes, only: [:create, :destroy]
     end
   end
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
