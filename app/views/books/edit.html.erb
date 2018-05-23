@@ -1,0 +1,27 @@
+<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>話数</th>
+        <th>話名</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% count = 1 %>
+      <% @episodes.each do |epi| %>
+      <tr>
+        <td>第<%= count %>話</td>
+        <td><%= epi.epi_title %></td>
+        <td>
+          <button type="button" class="btn btn-warning">話の編集</button>
+        </td>
+      </tr>
+      <% count += 1 %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to new_book_episode_path(@book) do %>
+  <button type="button" class="btn btn-success">話を追加</button>
+  <% end %>
+</div>

@@ -15,7 +15,7 @@
 .notice-css {
   border: 10px solid #cccccc;
   width: 700px ;
-  border-radius: 20px ;
+  border-radius: 20px;
 }
 
 /* 本棚 */
@@ -43,13 +43,24 @@
 }
 
 .spine-episode-name {
-  position: relative;
+  position: absolute;
   z-index: 100;
+  left: 27px;
+  top: 55px;
+  color: white;
+}
+
+.spine-box{
+  width: 100px;
+  height: 400px;
+  position: relative;
   float: left;
 }
 
 .episode-number {
-  position: relative;
+  position: absolute;
   z-index: 100;
-  float: left;
+  left: 26px;
+  top: 3px;
+  color: white;
 }

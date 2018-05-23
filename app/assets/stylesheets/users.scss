@@ -1,3 +1,43 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.info-box {
+  border: 1px solid;
+}
+.info {
+  margin-left: 15px;
+}
+/* ユーザー画像を丸で囲んでいる */
+.user-image-box {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;/* はみ出た部分のカット */
+  border-radius: 300px;
+  border: 1px solid;
+  float: left;
+  margin: 0px 0px 15px 15px;
+}
+.user-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-book-continue-number {
+  float: left;
+  position: absolute;
+  top: 180px;
+  left: 380px;
+}
+.user-book-finish-number {
+  position: absolute;
+  top: 240px;
+  left: 380px;
+}
+
+.nav-items {
+  margin-top: 10px;
+}

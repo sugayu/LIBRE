@@ -28,8 +28,9 @@ class EpisodesController < ApplicationController
     end
 
     #全ページ数の計算
-    @total_page = @scanedline.count / 10
-    total_page = @scanedline.count / 10#@percentageを出すために必要
+    @total_page = (@scanedline.count / 10.0).ceil
+    total_page = (@scanedline.count / 10.0).ceil#@percentageを出すために必要
+
     #現在のページ番号
     @current_page = @user_episode.progress / 10 + 1
 
@@ -76,8 +77,45 @@ class EpisodesController < ApplicationController
     redirect_to book_episode_path(book, previous_id)
   end
 
-  private
-  def user_episode_params
-    params.require(:user_episode).permit(:user_id, :episode_id, :progress)
+  def new
+    @episode = Episode.new
+    @book = Book.find(params[:book_id])
+    @episodes = @book.episodes
+    gon.book_id = @book.id
+
+    @body = params[:text]
+    # @episode_preview = Episode.build()
+
+    
+    if @body == nil
+      @epi_start = 0
+      @epi_end = 9
+      @scanedline = []
+    else
+    @scanedline = @body.scan(/.{1,#{20}}/)#200文字として1回とすると改行がある時点で次の配列に行ってしまう
+    
+    # binding.pry
+    @epi_start = 0
+    @epi_end = @epi_start + 9
   end
+
+end
+
+def create
+  episode = Episode.new(episode_params)
+  episode.epi_delete_flg = 0
+  episode.book_id = Book.find(params[:book_id]).id
+  episode.save
+  book = Book.find(params[:book_id])
+  redirect_to edit_book_path(book)
+end
+
+private
+def user_episode_params
+  params.require(:user_episode).permit(:user_id, :episode_id, :progress)
+end
+
+def episode_params
+  params.require(:episode).permit(:book_id, :epi_title, :epi_body, :epi_delete_flg)
+end
 end

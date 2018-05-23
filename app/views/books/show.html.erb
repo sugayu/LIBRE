@@ -3,23 +3,27 @@
   <div class="spine-contents clearfix">
     <% count = 1 %>
     <% @book.episodes.each do |epi| %>
-    <div class="episode-number">
-      第 <%= count %> 話
-    </div>
-
-    <%= link_to book_episode_path(@book, epi) do %>
-    <div class="spine-item">
-      <div class="spine-image">
-        <%= image_tag('green_back.png', :size => "100x400") %>
+    <div class="spine-box">
+      <%= link_to book_episode_path(@book, epi) do %>
+      <div class="spine-item">
+        
+        <div class="episode-number">
+          <b>第 <%= count %> 話</b>
+        </div>
+        <div class="spine-image">
+          <% if  %>
+          <%= image_tag('green_back.png', :size => "100x500") %>
+          <% else %>
+          <% end %>
+        </div>
       </div>
+      <div class="spine-episode-name">
+        <%= epi.epi_title %>
+      </div>
+      <% count += 1 %>
     </div>
-
-    <% count += 1 %>
 
     <% end %>
-    <div class="spine-episode-name">
-      <%= epi.epi_title %>
-    </div>
     <% end %>
   </div>
 

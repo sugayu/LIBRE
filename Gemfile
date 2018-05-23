@@ -80,5 +80,5 @@ gem 'font-awesome-rails'
 #これを使うとcontroller内でセットした変数をJavascript内で使う事ができる
 gem 'gon'
 
-##ポップアップモーダルを簡単に実装するためのgem（使えないため時期が来たら削除する）
-#gem 'magnific-popup-rails', '~> 1.1'
+#ページネーション
+gem 'kaminari'

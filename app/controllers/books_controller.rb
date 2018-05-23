@@ -8,4 +8,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
   end
+
+  def edit
+    @book = Book.find(params[:id])
+    @episodes = @book.episodes
+  end
 end
