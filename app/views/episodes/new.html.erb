@@ -12,7 +12,8 @@
       <label for="exampleFormControlTextarea1">話の内容</label>
       <%= f.text_area :epi_body, class:"form-control", id: "body" %>
     </div>
-    <div class="preview">
+
+    <div id="preview">
       <%#= link_to previous_path(@book, @user_episode), method: :PATCH, id: "previous_page" do%>
       <div class="previous-button-preview"></div>
       <%# end %>
@@ -24,7 +25,6 @@
           <% end %>
         </div>
       </div>
-
       <%#= link_to next_path(@book, @user_episode), method: :PATCH, id: "next_page" do%>
       <div class="next-button"></div>
       <%# end %>
@@ -47,7 +47,7 @@
         if(old != (v=elm.value)){
           old = v;
           console.log(elm.value + "が入力されています");
-          console.log("/books/" + gon.book_id + "/episodes/new")
+          console.log("/books/" + gon.book_id + "/episodes/new");
           $.ajax({
             url: "/books/" + gon.book_id + "/episodes/new",
             // url: "/books/1/episodes/new",
@@ -57,6 +57,7 @@
             success: function(data){
               //成功時の処理
               console.log("「" +  elm.value + "」を更新");
+              $('#preview').html(data);//Webページが全部出てしまう
             },
             error: function(data){
               //失敗時の処理

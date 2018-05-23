@@ -83,18 +83,17 @@ class EpisodesController < ApplicationController
     @episodes = @book.episodes
     gon.book_id = @book.id
 
-    @body = params[:text]
+    body = params[:text]
     # @episode_preview = Episode.build()
 
-    
-    if @body == nil
+    book = @book.episodes.build(book_id: @book.id, epi_title: "test", epi_body: body, epi_delete_flg: 0)
+    if book.epi_body == nil
       @epi_start = 0
       @epi_end = 9
       @scanedline = []
     else
-    @scanedline = @body.scan(/.{1,#{20}}/)#200文字として1回とすると改行がある時点で次の配列に行ってしまう
-    
-    # binding.pry
+    @scanedline = book.epi_body.scan(/.{1,#{20}}/)
+
     @epi_start = 0
     @epi_end = @epi_start + 9
   end
