@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   #エピソードプレビューURL
   get '/books/:book_id/episodes/preview' => 'previews#episode', as: 'preview'
+  get '/books/:book_id/episodes/preview/next' => 'previews#next_preview', as: 'next_preview'
 
   resources :books, only: [:index, :show, :new, :create, :edit] do
     resources :episodes, only: [:show, :new, :create, :edit] do

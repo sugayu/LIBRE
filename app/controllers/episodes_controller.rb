@@ -82,8 +82,6 @@ class EpisodesController < ApplicationController
     @book = Book.find(params[:book_id])
     @episodes = @book.episodes
     gon.book_id = @book.id
-
-
   end
 
   def create
