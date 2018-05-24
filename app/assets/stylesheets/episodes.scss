@@ -176,6 +176,19 @@
   position:fixed;
   z-index: 2;
 }
+
+#preview {
+  display: none;
+  width: 570px;
+  height: 604px;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #666666;
+  position:fixed;
+  z-index: 2;
+}
+
 /* モーダル 背景エリア */
 #modal-bg {
   display:none;

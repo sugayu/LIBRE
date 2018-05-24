@@ -1,8 +1,14 @@
 <div class="mt-5 col-10 mx-auto" style="width: 100%;">
+
+  <div id="preview">
+    <div id="preview-contents"></div>
+  </div>
+
   <h1>話を追加する（第<%= @episodes.count + 1 %>話）</h1>
 
-  <%= form_for(@episode, url: book_episodes_path, method: :post) do |f| %>
-  <form>
+  
+
+    <%= form_for(@episode, url: book_episodes_path, method: :post) do |f| %>
     <div class="form-group">
       <label for="exampleFormControlInput1">話のタイトル</label>
       <%= f.text_field :epi_title, class:"form-control"%>
@@ -13,59 +19,76 @@
       <%= f.text_area :epi_body, class:"form-control", id: "body" %>
     </div>
 
-    <div id="preview">
-      <%#= link_to previous_path(@book, @user_episode), method: :PATCH, id: "previous_page" do%>
-      <div class="previous-button-preview"></div>
-      <%# end %>
-      <!-- 本 -->
-      <div class="book-box">
-        <div class="upright">
-          <% for num in @epi_start..@epi_end do %>
-          <div><%= @scanedline[num] %></div>
-          <% end %>
-        </div>
-      </div>
-      <%#= link_to next_path(@book, @user_episode), method: :PATCH, id: "next_page" do%>
-      <div class="next-button"></div>
-      <%# end %>
-    </div>
+    <button type="button" class="btn btn-success" id="modal-preview-open">プレビュー</button>
 
     <%= f.submit %>
-  </form>
+    <% end %>
 
-  <% end %>
+
+
+
   <script type="text/javascript">
-    $(function(){
-      $('#body').each(function(){
-        $(this).bind('keyup', text_update(this));
-      });
+  //modal
+  $(function(){
+    //プレビューボタンを押した時
+    $("#modal-preview-open").click(function(){
+      //body内の最後に<div id="modal-bg"></div>を挿入
+      $("body").append('<div id="modal-bg"></div>');
+    //画面中央を計算する関数を実行
+    modalResize();
+    body = $("#body").val();
+    console.log( body + "が入力されています");
+    $.ajax({
+      url: "/books/" + gon.book_id + "/episodes/preview",
+      type: "GET",
+      data: {text : body, book_id : gon.book_id},
+      datatype: "html",
+      success: function(data){
+        //成功時の処理
+        console.log("「" +  body + "」を更新");
+        $('#preview-contents').html(data);//Webページが全部出てしまう
+      },
+      error: function(data){
+        //失敗時の処理
+        console.log("更新できませんでした。");
+      }
+    });
+    //モーダルウィンドウを表示
+    $("#modal-bg,#preview").fadeIn("slow");
+
+    //画面のどこかをクリックしたらモーダルを閉じる
+    $("#modal-bg,#preview").click(function(e){
+
+      if(!$(e.target).closest('#preview').length) {
+        console.log('外側がクリックされました。');
+        $("#preview,#modal-bg").fadeOut("slow",function(){
+         //挿入した<div id="modal-bg"></div>を削除
+         $('#modal-bg').remove();
+       });
+      } else {
+        console.log('内側がクリックされました。');
+      }
+
+
     });
 
-    function text_update(elm){
-      var v, old = elm.value;
-      return function(){
-        if(old != (v=elm.value)){
-          old = v;
-          console.log(elm.value + "が入力されています");
-          console.log("/books/" + gon.book_id + "/episodes/new");
-          $.ajax({
-            url: "/books/" + gon.book_id + "/episodes/new",
-            // url: "/books/1/episodes/new",
-            type: "GET",
-            data: {text : elm.value, book_id : gon.book_id},
-            datatype: "html",
-            success: function(data){
-              //成功時の処理
-              console.log("「" +  elm.value + "」を更新");
-              $('#preview').html(data);//Webページが全部出てしまう
-            },
-            error: function(data){
-              //失敗時の処理
-              console.log("更新できませんでした。");
-            }
-          });
-        }
+    //画面の左上からpreviewの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+    $(window).resize(modalResize);
+    function modalResize(){
+      var w = $(window).width();
+      var h = $(window).height();
+
+      var cw = $("#preview").outerWidth();
+      var ch = $("#preview").outerHeight();
+
+        //取得した値をcssに追加する
+        $("#preview").css({
+          "left": ((w - cw)/2) + "px",
+          "top": ((h - ch)/2) + "px"
+        });
       }
-    }
-  </script>
+    });
+  });
+
+</script>
 </div>

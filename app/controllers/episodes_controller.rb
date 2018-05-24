@@ -83,38 +83,24 @@ class EpisodesController < ApplicationController
     @episodes = @book.episodes
     gon.book_id = @book.id
 
-    body = params[:text]
-    # @episode_preview = Episode.build()
 
-    book = @book.episodes.build(book_id: @book.id, epi_title: "test", epi_body: body, epi_delete_flg: 0)
-    if book.epi_body == nil
-      @epi_start = 0
-      @epi_end = 9
-      @scanedline = []
-    else
-    @scanedline = book.epi_body.scan(/.{1,#{20}}/)
-
-    @epi_start = 0
-    @epi_end = @epi_start + 9
   end
 
-end
+  def create
+    episode = Episode.new(episode_params)
+    episode.epi_delete_flg = 0
+    episode.book_id = Book.find(params[:book_id]).id
+    episode.save
+    book = Book.find(params[:book_id])
+    redirect_to edit_book_path(book)
+  end
 
-def create
-  episode = Episode.new(episode_params)
-  episode.epi_delete_flg = 0
-  episode.book_id = Book.find(params[:book_id]).id
-  episode.save
-  book = Book.find(params[:book_id])
-  redirect_to edit_book_path(book)
-end
+  private
+  def user_episode_params
+    params.require(:user_episode).permit(:user_id, :episode_id, :progress)
+  end
 
-private
-def user_episode_params
-  params.require(:user_episode).permit(:user_id, :episode_id, :progress)
-end
-
-def episode_params
-  params.require(:episode).permit(:book_id, :epi_title, :epi_body, :epi_delete_flg)
-end
+  def episode_params
+    params.require(:episode).permit(:book_id, :epi_title, :epi_body, :epi_delete_flg)
+  end
 end
