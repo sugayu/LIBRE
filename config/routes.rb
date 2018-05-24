@@ -1,16 +1,4 @@
 Rails.application.routes.draw do
-  get 'episodes/edit'
-
-  get 'books/edit'
-
-  get 'books/new'
-
-  get 'episodes/new'
-
-  get 'users/mybook'
-
-  get 'users/show'
-
   ###########Adminルーティング###########
   devise_for :admins, only: [:sign_in, :sign_out, :session],
   :controllers => {
@@ -47,6 +35,9 @@ Rails.application.routes.draw do
 
   #マイブックURL
   get '/mybook' => 'users#mybook', as: 'mybook'
+
+  #エピソードプレビューURL
+  get '/books/:book_id/episodes/preview' => 'previews#episode', as: 'preview'
 
   resources :books, only: [:index, :show, :new, :create, :edit] do
     resources :episodes, only: [:show, :new, :create, :edit] do
