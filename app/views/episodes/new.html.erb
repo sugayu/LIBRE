@@ -1,49 +1,46 @@
 <div class="mt-5 col-10 mx-auto" style="width: 100%;">
 
   <div id="preview">
+    <div class="previous-button-preview" id="previous-preview"></div>
     <div id="preview-contents"></div>
+    <div class="next-button" id="next-preview"></div>
   </div>
 
   <h1>話を追加する（第<%= @episodes.count + 1 %>話）</h1>
 
-  
+  <%= form_for(@episode, url: book_episodes_path, method: :post) do |f| %>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">話のタイトル</label>
+    <%= f.text_field :epi_title, class:"form-control"%>
+  </div>
 
-    <%= form_for(@episode, url: book_episodes_path, method: :post) do |f| %>
-    <div class="form-group">
-      <label for="exampleFormControlInput1">話のタイトル</label>
-      <%= f.text_field :epi_title, class:"form-control"%>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">話の内容</label>
-      <%= f.text_area :epi_body, class:"form-control", id: "body" %>
-    </div>
-
-    <button type="button" class="btn btn-success" id="modal-preview-open">プレビュー</button>
-
-    <%= f.submit %>
-    <% end %>
-
-
-
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">話の内容</label>
+    <%= f.text_area :epi_body, class:"form-control", id: "body" %>
+  </div>
+  <%= f.submit %>
+  <button type="button" class="btn btn-success" id="modal-preview-open">プレビュー</button>
+  <% end %>
 
   <script type="text/javascript">
+    var count = 0;
   //modal
   $(function(){
     //プレビューボタンを押した時
     $("#modal-preview-open").click(function(){
       //body内の最後に<div id="modal-bg"></div>を挿入
       $("body").append('<div id="modal-bg"></div>');
-    //画面中央を計算する関数を実行
-    modalResize();
-    body = $("#body").val();
-    console.log( body + "が入力されています");
-    $.ajax({
-      url: "/books/" + gon.book_id + "/episodes/preview",
-      type: "GET",
-      data: {text : body, book_id : gon.book_id},
-      datatype: "html",
-      success: function(data){
+      //画面中央を計算する関数を実行
+      modalResize();
+      body = $("#body").val();
+      console.log( body + "が入力されています");
+
+      $.ajax({
+        url: "/books/" + gon.book_id + "/episodes/preview",
+        type: "GET",
+        data: {text : body, book_id : gon.book_id},
+        datatype: "html",
+        success: function(data){
         //成功時の処理
         console.log("「" +  body + "」を更新");
         $('#preview-contents').html(data);//Webページが全部出てしまう
@@ -53,12 +50,59 @@
         console.log("更新できませんでした。");
       }
     });
+    //モーダル表示関数を呼ぶ
+    modal_show();
+  });
+  });
+
+  //ネクストボタンを押した時
+  $("#next-preview").click(function(){
+    //body内の最後に<div id="modal-bg"></div>を挿入
+    $("body").append('<div id="modal-bg"></div>');
+    //画面中央を計算する関数を実行
+    modalResize();
+    body = $("#body").val();
+    count += 10;
+    console.log(count);
+
+    $.ajax({
+      url: "/books/" + gon.book_id + "/episodes/preview/next",
+      type: "GET",
+      data: {text : body, book_id : gon.book_id, epi_start : count},
+      datatype: "html",
+      success: function(data){
+        //成功時の処理
+        console.log(data);
+        // $('.book-box').html("<div id='preview-contents'></div>");
+        $('#preview-contents').html(data);//Webページが全部出てしまう
+        console.log("next更新できました。");
+      },
+      error: function(data){
+        //失敗時の処理
+        console.log("next更新できませんでした。");
+      }
+    });
+    //モーダル表示関数を呼ぶ
+    modal_show();
+  });
+  function modalResize(){
+    var w = $(window).width();
+    var h = $(window).height();
+
+    var cw = $("#preview").outerWidth();
+    var ch = $("#preview").outerHeight();
+    //取得した値をcssに追加する
+    $("#preview").css({
+      "left": ((w - cw)/2) + "px",
+      "top": ((h - ch)/2) + "px"
+    });
+  } 
+
+  function modal_show(){
     //モーダルウィンドウを表示
     $("#modal-bg,#preview").fadeIn("slow");
-
     //画面のどこかをクリックしたらモーダルを閉じる
     $("#modal-bg,#preview").click(function(e){
-
       if(!$(e.target).closest('#preview').length) {
         console.log('外側がクリックされました。');
         $("#preview,#modal-bg").fadeOut("slow",function(){
@@ -68,27 +112,9 @@
       } else {
         console.log('内側がクリックされました。');
       }
-
-
     });
-
     //画面の左上からpreviewの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
     $(window).resize(modalResize);
-    function modalResize(){
-      var w = $(window).width();
-      var h = $(window).height();
-
-      var cw = $("#preview").outerWidth();
-      var ch = $("#preview").outerHeight();
-
-        //取得した値をcssに追加する
-        $("#preview").css({
-          "left": ((w - cw)/2) + "px",
-          "top": ((h - ch)/2) + "px"
-        });
-      }
-    });
-  });
-
+  }
 </script>
 </div>
