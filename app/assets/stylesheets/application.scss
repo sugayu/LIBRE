@@ -17,6 +17,7 @@
 
  @import "font-awesome";
  @import "bootstrap";
+
  /* 共通 */
  .clearfix::after {
   content: "";
@@ -27,4 +28,16 @@
 /* header */
 .text-color {
   color: white;
+}
+
+.header-icon {
+  font-family: 'Handlee', cursive;
+  font-size: 38px;
+  color: white;
+}
+
+.user-name{
+  margin-left: 30px;
+  color: white;
+  font-size: 20px;
 }

@@ -32,7 +32,6 @@ class PreviewsController < ApplicationController
       @scanedline = []
     else
       @scanedline = book.epi_body.scan(/.{1,#{20}}/)
-      binding.pry
       @epi_start = count
       #countはstring型なのでinteger型への型変換が必要である。
       @epi_end = @epi_start.to_i + 9

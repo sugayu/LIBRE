@@ -7,6 +7,8 @@
   <!-- gonを使うための記述 -->
   <%= include_gon %>
 
+  <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
@@ -16,28 +18,27 @@
   <% if user_signed_in? %>
   <!-- ユーザーログイン時 header -->
   <nav class="navbar navbar-expand-lg" style="height: 60px; background-color: #3F51B5;">
-    <a class="navbar-brand text-color" href="#">LIBRE</a>
+    <%= link_to top_path do %>
+    <div class="header-icon">LIBRE</div>
+    <% end %>
+    <div class="user-name"><%= current_user.user_name %>でログイン中</div>
+      
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
-        
-        <li class="nav-item " style="color: white;">
-          <%= current_user.user_name %>
-        </li>
-
         <li class="nav-item">
-          <%= link_to mypage_path class:"nav-link mx-2"  do %>
-           My Page
+          <%= link_to mypage_path, class:"nav-link mx-2"  do %>
+          <div class="text-color">My Page</div>
           <% end %>
         </li>
 
         <li class="nav-item">
           <%= link_to destroy_user_session_path, method: :delete, class:"nav-link mx-2"  do %>
-           Sign Out
+          <div class="text-color">Sign Out</div>
           <% end %>
         </li>
         <li class="nav-item">
           <%= link_to books_path, class:"nav-link mx-2"  do %>
-          Books
+          <div class="text-color">Books</div>
           <% end %>
         </li>        
         <li class="nav-item">
@@ -52,7 +53,7 @@
   <% elsif admin_signed_in? %>
   <!-- 管理者ログイン時 header -->
   <nav class="navbar navbar-expand-lg" style="height: 60px; background-color: #3F51B5;">
-    <a class="navbar-brand text-color" href="#">LIBRE</a>
+    <a class="navbar-brand text-color" href="#" class="header-web-font">LIBRE</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
@@ -73,7 +74,7 @@
 
   <!-- ユーザーログアウト時ヘッダー（ゲスト） -->
   <nav class="navbar navbar-expand-lg" style="height: 60px; background-color: #3F51B5;">
-    <a class="navbar-brand text-color" href="#">LIBRE</a>
+    <a class="navbar-brand text-color" href="#" class="header-web-font">LIBRE</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
