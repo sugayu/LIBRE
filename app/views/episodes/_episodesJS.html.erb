@@ -30,6 +30,19 @@
     });
   }
 
+  function progress_bar_hidden_visible(){
+    var pb = document.getElementById("page-counter");
+    if(pb.style.visibility=="visible"){
+      //非表示
+      pb.style.visibility ="hidden";
+      $('#visible-hidden').html("<div class='item-icon' id='visible-hidden'><i class='fa fa-eye fa-3x' aria-hidden='true'></i></div>");
+    }else{
+      //表示
+      pb.style.visibility ="visible";
+      $('#visible-hidden').html("<div class='item-icon' id='visible-hidden'><i class='fa fa-eye-slash fa-3x' aria-hidden='true'></i></div>");
+    }
+  }
+
   //ページが表示されたときに呼ばれているjacvascript
   (function(){
     //矢印キーで本をめくれるようにした連続で押しすぎると予期しない挙動になってしまう。（最後のページの時の挙動が書かれていない）
@@ -99,6 +112,7 @@
 
   //modal
   $(function(){
+
   //辞書をクリックしたら
   $("#modal-dictionary-open").click(function(){
     var SelStr = document.getSelection();
@@ -108,6 +122,24 @@
       $("body").append('<div id="modal-bg"></div>');
     //画面中央を計算する関数を実行
     modalResize();
+
+    //ajax通信で辞書検索の履歴を作る
+    var SelStr = document.getSelection();
+
+    $.ajax({
+      url: "/dictionary_records/create",
+      type: "GET",//本当はPOSTが正しいがPOSTだとエラーが出てしまうためGETにしている
+      data: {selected : String(SelStr), book_id : gon.book_id ,episode_id : gon.episode_id},
+      datatype: "html",
+      success: function(data){
+        //成功時の処理
+        console.log("「" + String(SelStr) + "」を辞書辞書履歴に追加しました");
+      },
+      error: function(data){
+        //失敗時の処理
+        console.log("辞書履歴に追加できませんでした");
+      }
+    });
 
     //モーダルウィンドウを表示
     $("#modal-bg,#modal-dictionary").fadeIn("slow");
@@ -137,6 +169,7 @@
         });
       }
     });
+
 });
 </script>
 

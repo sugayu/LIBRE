@@ -22,8 +22,10 @@ class UsersController < ApplicationController
     #完結済の本の数
     @finish_books = current_user.books.where(status: 0)
 
-    @mywords = current_user.mywords.page(params[:page]).per(2)
+    @mywords = current_user.mywords.page(params[:page]).per(5)
     @likes = current_user.likes
+    @dictionary_records = current_user.dictionary_records.page(params[:page]).per(5)
+
   end
 
   def mybook

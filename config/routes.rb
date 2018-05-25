@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dictionary_records/create'
+
   ###########Adminルーティング###########
   devise_for :admins, only: [:sign_in, :sign_out, :session],
   :controllers => {
@@ -29,6 +31,10 @@ Rails.application.routes.draw do
   #マイワードURL
   #HTTPメソッドがgetではなくpostが本来は正しいがAjaxでactionを呼ぶときにgetじゃないとエラーになってしまうためgetを使っている
   get '/mywords/create' => 'mywords#create', as: 'create_mywords'
+
+  #辞書履歴作成URL
+  #HTTPメソッドがgetではなくpostが本来は正しいがAjaxでactionを呼ぶときにgetじゃないとエラーになってしまうためgetを使っている
+  get '/dictionary_records/create' => 'dictionary_records#create', as: 'create_dictionary_records'
 
   #マイページURL
   get '/mypage' => 'users#show', as: 'mypage'
