@@ -9,4 +9,5 @@ class Book < ApplicationRecord
   has_many :mywords
   has_many :likes
   has_many :episodes
+  has_many :dictionary_records
 end

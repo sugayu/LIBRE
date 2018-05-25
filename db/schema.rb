@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180514032836) do
+ActiveRecord::Schema.define(version: 20180525002422) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20180514032836) do
     t.text "cover_img_id"
     t.integer "status"
     t.boolean "book_delete_flg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dictionary_records", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "episode_id"
+    t.integer "book_id"
+    t.string "word"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

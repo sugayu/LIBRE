@@ -14,4 +14,5 @@ class User < ApplicationRecord
   has_many :user_episodes
   has_many :books
   has_many :likes
+  has_many :dictionary_records
 end
