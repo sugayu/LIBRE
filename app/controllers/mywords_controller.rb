@@ -2,7 +2,9 @@ class MywordsController < ApplicationController
   def create
     word = params[:selected]
     book = Book.find(params[:book_id])
+    episode = Episode.find(params[:episode_id])
     myword = Myword.create(user_id: current_user.id, book_id: book.id, word: word)
+    flash[:notice] = "「" + word + "」" +"がマイワードに追加されました。"
     render nothing: true
   end
 end

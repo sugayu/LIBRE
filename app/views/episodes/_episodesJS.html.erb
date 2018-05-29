@@ -17,7 +17,7 @@
     $.ajax({
       url: "/mywords/create",
       type: "GET",//本当はPOSTが正しいがPOSTだとエラーが出てしまうためGETにしている
-      data: {selected : String(SelStr), book_id : gon.book_id},
+      data: {selected : String(SelStr), book_id : gon.book_id, episode_id : gon.episode_id},
       datatype: "html",
       success: function(data){
         //成功時の処理

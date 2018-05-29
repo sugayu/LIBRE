@@ -22,7 +22,7 @@
     <div class="header-icon">LIBRE</div>
     <% end %>
     <div class="user-name"><%= current_user.user_name %>でログイン中</div>
-      
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
@@ -102,6 +102,10 @@
       </ul>
     </div>
   </nav>
+  <% end %>
+  <!-- flashメッセージの表示 -->
+  <% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
   <% end %>
 
   <%= yield %>

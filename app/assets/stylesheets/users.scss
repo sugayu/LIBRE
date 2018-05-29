@@ -41,3 +41,35 @@
 .nav-items {
   margin-top: 10px;
 }
+
+#carousel1-text {
+  position: absolute;
+  top: 7%;
+  left: 10%;
+  font-size: 32px;
+  color: #B53F51;
+}
+
+#carousel2-text {
+  position: absolute;
+  top: 7%;
+  left: 35%;
+  font-size: 32px;
+  color: #B5A33F;
+}
+
+#carousel3-text {
+  position: absolute;
+  top: 8%;
+  left: 13%;
+  font-size: 32px;
+  color: #51B53F;
+}
+
+/* マイページのタブのCSS */
+.myword_img, .like_img {
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 150px;
+  height: 200px;
+}
