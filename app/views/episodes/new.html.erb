@@ -6,7 +6,7 @@
     <div class="next-button" id="next-preview"></div>
   </div>
 
-  <h1>話を追加する（第<%= @episodes.count + 1 %>話）</h1>
+  <h1><i class="fa fa-book" aria-hidden="true"></i><%= @book.book_title %>に話を追加する（第<%= @episodes.count + 1 %>話）</h1>
 
   <%= form_for(@episode, url: book_episodes_path, method: :post) do |f| %>
   <div class="form-group">
@@ -18,8 +18,8 @@
     <label for="exampleFormControlTextarea1">話の内容</label>
     <%= f.text_area :epi_body, class:"form-control", id: "body" %>
   </div>
-  <%= f.submit %>
-  <button type="button" class="btn btn-success" id="modal-preview-open">プレビュー</button>
+  <%= f.submit class: "btn btn-success" %>
+  <button type="button" class="btn btn-primary" id="modal-preview-open">プレビュー</button>
   <% end %>
 
   <script type="text/javascript">
@@ -28,6 +28,7 @@
   $(function(){
     //プレビューボタンを押した時
     $("#modal-preview-open").click(function(){
+      count = 0//カウント初期化
       //body内の最後に<div id="modal-bg"></div>を挿入
       $("body").append('<div id="modal-bg"></div>');
       //画面中央を計算する関数を実行
@@ -55,8 +56,10 @@
   });
   });
 
-  //ネクストボタンを押した時
+  //ネクストプレビューボタンを押した時
   $("#next-preview").click(function(){
+    //モーダルの解除
+    $('#modal-bg').remove();
     //body内の最後に<div id="modal-bg"></div>を挿入
     $("body").append('<div id="modal-bg"></div>');
     //画面中央を計算する関数を実行
@@ -65,23 +68,43 @@
     count += 10;
     console.log(count);
 
+    // $.ajax({
+    //   url: "/episodes/preview/next",
+    //   type: "GET",
+    //   data: {text : body, book_id : gon.book_id, epi_start : count},
+    //   datatype: "html",
+    //   success: function(data){
+    //     //成功時の処理
+    //     console.log(data);
+    //     // $('.book-box').html("<div id='preview-contents'></div>");
+    //     $('#preview-contents').html(data);//Webページが全部出てしまう
+    //     console.log("next更新できました。");
+    //   },
+    //   error: function(data){
+    //     //失敗時の処理
+    //     console.log("next更新できませんでした。");
+    //   }
+    // });
     $.ajax({
-      url: "/books/" + gon.book_id + "/episodes/preview/next",
-      type: "GET",
+      url: '/episodes/preview/next',
+      type:'GET',
       data: {text : body, book_id : gon.book_id, epi_start : count},
-      datatype: "html",
-      success: function(data){
-        //成功時の処理
-        console.log(data);
-        // $('.book-box').html("<div id='preview-contents'></div>");
-        $('#preview-contents').html(data);//Webページが全部出てしまう
-        console.log("next更新できました。");
-      },
-      error: function(data){
-        //失敗時の処理
-        console.log("next更新できませんでした。");
-      }
-    });
+      // async : false,
+      dataType: 'html',
+    }).done(function(data) {
+     console.log("next更新できました。");
+     $('#preview-contents').html(data);
+   })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      console.log("XMLHttpRequest : " + jqXHR.status);
+      console.log("textStatus : " + textStatus);
+      console.log("errorThrown : " + errorThrown)
+    })
+    .always(function() {
+     console.log("finish");
+   })
+
+
     //モーダル表示関数を呼ぶ
     modal_show();
   });
