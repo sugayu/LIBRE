@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
+  after_initialize :set_default_value, if: :new_record?
+
 
   attachment :user_img
 
@@ -15,4 +17,12 @@ class User < ApplicationRecord
   has_many :books
   has_many :likes
   has_many :dictionary_records
+
+  private
+  def set_default_value
+    self.theme_id  ||= 1
+    self.quit_flg = false
+    self.title_show_flg = true
+    self.progress_bar_show_flg = true
+  end
 end

@@ -10,10 +10,19 @@
 
     <div class="mx-auto book-contents clearfix">
       <div class="header">
+        <% if current_user.title_show_flg == true %>
         <i class="fa fa-book" aria-hidden="true"></i>&nbsp;<%= @book.book_title %>&nbsp;&nbsp;&nbsp;<i class="fa fa-list" aria-hidden="true"></i>&nbsp;<%= @episode.epi_title %>
+        <% else %>
+        <div></div>
+        <% end %>
       </div>
 
+      <% if current_user.progress_bar_show_flg == true %>
       <div id="page-counter"><%= @current_page %>ページ  / 全 <%= @total_page %>ページ中&nbsp;(&nbsp;<%= @percentage %>%&nbsp;)</div>
+      <% else %>
+      <div></div>
+      <% end %>
+
       <!-- 一番最初のページだったら「前の話へ」ボタンを表示するようにする -->
       <% if @user_episode.progress == 0 %>
       <!-- 本の一番最初のエピソードだったらボタンを表示させないようにする -->
@@ -148,12 +157,36 @@
         <% end %>
         <% end %>
 
-        <div class="circle-item" onclick="progress_bar_hidden_visible();" >
+        <%= link_to change_title_show_flg_path(@book, @episode), method: :patch do %>
+        <div class="circle-item" >
           <div class="item-list ">
-            <div class="item-icon" id="visible-hidden"><i class="fa fa-eye-slash fa-3x" aria-hidden="true"></i></div>
+            <div class="item-icon">
+              <% if current_user.title_show_flg == true %>
+              <i class="fa fa-eye-slash fa-3x" aria-hidden="true"></i>
+              <% else %>
+              <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="item-text">タイトル</div>
+          </div>
+        </div>
+        <% end %>
+
+        <%= link_to change_progress_bar_show_flg_path(@book, @episode), method: :patch do %>
+        <div class="circle-item" >
+          <div class="item-list ">
+            <div class="item-icon">
+              <% if current_user.progress_bar_show_flg == true %>
+              <i class="fa fa-eye-slash fa-3x" aria-hidden="true"></i>
+              <% else %>
+              <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
+              <% end %>
+            </div>
             <div class="item-text">プログレスバー</div>
           </div>
         </div>
+        <% end %>
+
 
       </div>
     </div>

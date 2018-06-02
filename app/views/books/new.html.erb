@@ -1,2 +1,17 @@
-<h1>Books#new</h1>
-<p>Find me in app/views/books/new.html.erb</p>
+<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+  <h1><i class="fa fa-plus" aria-hidden="true"></i>新しい本を追加する</h1>
+
+  <%= form_for(@book) do |f| %>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">本のタイトル</label>
+    <%= f.text_field :book_title, class:"form-control"%>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">本の表紙画像</label>
+    <%= f.attachment_field :cover_img%>
+  </div>
+  <%= f.submit class: "btn btn-success" %>
+  <% end %>
+
+</div>

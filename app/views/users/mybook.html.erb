@@ -6,6 +6,8 @@
       <tr>
         <th>本の表紙</th>
         <th>本のタイトル</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +19,12 @@
         <td> <%= book.book_title %> </td>
         <td>
           <%= link_to edit_book_path(book) do %>
-          <button type="button" class="btn btn-primary">本を編集</button>
+          <button type="button" class="btn btn-success">本を編集</button>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to book_path(book), method: :delete do %>
+          <button type="button" class="btn btn-danger">本を削除</button>
           <% end %>
         </td>
       </tr>

@@ -30,19 +30,6 @@
     });
   }
 
-  function progress_bar_hidden_visible(){
-    var pb = document.getElementById("page-counter");
-    if(pb.style.visibility=="visible"){
-      //非表示
-      pb.style.visibility ="hidden";
-      $('#visible-hidden').html("<div class='item-icon' id='visible-hidden'><i class='fa fa-eye fa-3x' aria-hidden='true'></i></div>");
-    }else{
-      //表示
-      pb.style.visibility ="visible";
-      $('#visible-hidden').html("<div class='item-icon' id='visible-hidden'><i class='fa fa-eye-slash fa-3x' aria-hidden='true'></i></div>");
-    }
-  }
-
   //ページが表示されたときに呼ばれているjacvascript
   (function(){
     //矢印キーで本をめくれるようにした連続で押しすぎると予期しない挙動になってしまう。（最後のページの時の挙動が書かれていない）

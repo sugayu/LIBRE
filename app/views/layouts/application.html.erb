@@ -40,12 +40,9 @@
           <%= link_to books_path, class:"nav-link mx-2"  do %>
           <div class="text-color">Books</div>
           <% end %>
-        </li>        
-        <li class="nav-item">
-          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i>Book</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i>Author</a>
+          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>
@@ -57,15 +54,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
-          <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link mx-2"  do %>
+          <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link mx-2 text-color"  do %>
           <i class="fas fa-sign-out-alt"></i> Sign Out
           <% end %>
         </li>        
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">Book Search</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-color" href="#">Author Search</a>
+          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>
@@ -78,26 +72,23 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">Book</a>
+          <%= link_to books_path, class:"nav-link mx-2"  do %>
+          <div class="text-color">Books</div>
+          <% end %>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">Genre</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-color" href="#">Signup</a>
+          <%= link_to new_user_registration_path, class:"nav-link mx-2 text-color" do %>
+          Signup
+          <% end %>
         </li>
         
         <li class="nav-item">
-          <%= link_to new_user_session_path, class:"nav-link mx-2"  do %>
+          <%= link_to new_user_session_path, class:"nav-link mx-2 text-color"  do %>
           login
           <% end %>
         </li>  
-        
         <li class="nav-item">
-          <a class="nav-link text-color" href="#">Book Search</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-color" href="#">Author Search</a>
+          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>
