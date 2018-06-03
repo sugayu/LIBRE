@@ -1,0 +1,60 @@
+<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+  <h2>検索対象を選んでください</h2>
+  <input type="radio" name="search-target" value="book" checked style="width:30px;height:30px;"><span style="font-size: 30px;" >本</span>
+  <input type="radio" name="search-target" value="user" style="width:30px;height:30px;" ><span style="font-size: 30px;" >著者</span>
+  <h2>検索ワードを入力してください</h2>
+  <input type="text" name="example1" id="search_word">
+  <button class="btn btn-success" id="search-button">検索</button>
+  
+  <div id="result"></div>
+</div>
+
+<script type="text/javascript">
+  $('#search-button').click( function() {
+    var target = $('input[name="search-target"]:checked').val();
+    var word = $("#search_word").val();
+    // console.log(target);
+    // console.log(word);
+    if (target == "book"){
+      //本の検索
+      $.ajax({
+        url: '/search_book',
+        type:'GET',
+        data: {search_word : word},
+        dataType: 'html',
+      }).done(function(data) {
+       // console.log("検索結果が更新できました。");
+       $('#result').html(data);
+     })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        console.log("XMLHttpRequest : " + jqXHR.status);
+        console.log("textStatus : " + textStatus);
+        console.log("errorThrown : " + errorThrown)
+      })
+      .always(function() {
+       // console.log("finish");
+     })
+    }else {
+      //ユーザーの検索
+      $.ajax({
+        url: '/search_user',
+        type:'GET',
+        data: {search_word : word},
+        dataType: 'html',
+      }).done(function(data) {
+       // console.log("検索結果が更新できました。");
+       $('#result').html(data);
+     })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        console.log("XMLHttpRequest : " + jqXHR.status);
+        console.log("textStatus : " + textStatus);
+        console.log("errorThrown : " + errorThrown)
+      })
+      .always(function() {
+       console.log("finish");
+     })
+    }
+
+
+  })
+</script>

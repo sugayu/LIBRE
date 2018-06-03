@@ -26,6 +26,13 @@ Rails.application.routes.draw do
   #テーマ変更URL
   patch '/books/:book_id/episodes/:id/change/theme' => 'users#change_theme', as: 'change_theme'
 
+  #タイトル表示・非表示URL
+  patch '/books/:book_id/episodes/:id/change_title_show_flg' => 'users#change_title_show_flg', as: 'change_title_show_flg'
+
+  #プログレスバー表示・非表示URL
+  patch '/books/:book_id/episodes/:id/change_progress_bar_show_flg' => 'users#change_progress_bar_show_flg', as: 'change_progress_bar_show_flg'
+
+
   #マイワードURL
   #HTTPメソッドがgetではなくpostが本来は正しいがAjaxでactionを呼ぶときにgetじゃないとエラーになってしまうためgetを使っている
   get '/mywords/create' => 'mywords#create', as: 'create_mywords'
@@ -38,17 +45,28 @@ Rails.application.routes.draw do
   get '/mypage' => 'users#show', as: 'mypage'
 
   #マイブックURL
-  get '/mybook' => 'users#mybook', as: 'mybook'
+  get '/users/:id/mybook' => 'users#mybook', as: 'mybook'
 
   #エピソードプレビューURL
   get '/books/:book_id/episodes/preview' => 'previews#episode', as: 'preview'
   get '/episodes/preview/next' => 'previews#next_preview', as: 'next_preview'
+  get '/episodes/preview/previous' => 'previews#previous_preview', as: 'previous_preview'
 
-  resources :books, only: [:index, :show, :new, :create, :edit] do
-    resources :episodes, only: [:show, :new, :create, :edit] do
+  #検索ページURL
+  get '/search' => 'searches#search', as: 'search'
+  #本検索URL
+  get '/search_book' => 'results#search_book', as: 'search_book'
+  #本検索URL
+  get '/search_user' => 'results#search_user', as: 'search_user'
+
+
+  resources :books, only: [:index, :show, :new, :create, :edit, :destroy] do
+    resources :episodes, only: [:show, :new, :create, :edit, :update, :destroy] do
       resources :likes, only: [:create, :destroy]
     end
   end
+
+  resources :users, only: [:edit, :update]
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

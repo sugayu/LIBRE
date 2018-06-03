@@ -90,6 +90,28 @@ class EpisodesController < ApplicationController
     episode.book_id = Book.find(params[:book_id]).id
     episode.save
     book = Book.find(params[:book_id])
+    flash[:notice] = "エピソードを追加しました！"
+    redirect_to edit_book_path(book)
+  end
+
+  def edit
+    @book = Book.find(params[:book_id])
+    @episode = Episode.find(params[:id])
+  end
+
+  def update
+    book = Book.find(params[:book_id])
+    episode = Episode.find(params[:id])
+    episode.update(episode_params)
+    flash[:notice] = "エピソードを更新しました！"
+    redirect_to edit_book_path(book)
+  end
+
+  def destroy
+    episode = Episode.find(params[:id])
+    episode.destroy
+    book = Book.find(params[:book_id])
+    flash[:notice] = "エピソードを削除しました！"
     redirect_to edit_book_path(book)
   end
 
@@ -101,4 +123,5 @@ class EpisodesController < ApplicationController
   def episode_params
     params.require(:episode).permit(:book_id, :epi_title, :epi_body, :epi_delete_flg)
   end
+
 end

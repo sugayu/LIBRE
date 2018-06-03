@@ -6,6 +6,7 @@
         <th>話数</th>
         <th>話名</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -15,7 +16,14 @@
         <td>第<%= count %>話</td>
         <td><%= epi.epi_title %></td>
         <td>
-          <button type="button" class="btn btn-warning">話の編集</button>
+          <%= link_to edit_book_episode_path(@book, epi) do %>
+          <button type="button" class="btn btn-success">話の編集</button>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to book_episode_path(@book, epi), method: :delete do %>
+          <button type="button" class="btn btn-danger">話の削除</button>
+          <% end %>
         </td>
       </tr>
       <% count += 1 %>

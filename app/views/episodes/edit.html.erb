@@ -1,2 +1,15 @@
-<h1>Episodes#edit</h1>
-<p>Find me in app/views/episodes/edit.html.erb</p>
+<div class="mt-5 col-10 mx-auto" style="width: 100%;">
+  <%= @book.book_title %>ーー<%= @episode.epi_title %>の編集ページ
+  <%= form_for(@episode, url: book_episode_path, method: :patch) do |f| %>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">話のタイトル</label>
+    <%= f.text_field :epi_title, class:"form-control"%>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">話の内容</label>
+    <%= f.text_area :epi_body, class:"form-control", id: "body" %>
+  </div>
+  <%= f.submit class: "btn btn-success" %>
+  <% end %>
+</div>

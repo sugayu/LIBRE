@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525002422) do
+ActiveRecord::Schema.define(version: 20180602121704) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 20180525002422) do
     t.boolean "quit_flg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "title_show_flg"
+    t.boolean "progress_bar_show_flg"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
