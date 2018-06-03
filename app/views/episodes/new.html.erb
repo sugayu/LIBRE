@@ -89,6 +89,39 @@
     modal_show();
   });
 
+    //プレビアスプレビューボタンを押した時
+  $("#previous-preview").click(function(){
+    //モーダルの解除
+    $('#modal-bg').remove();
+    //body内の最後に<div id="modal-bg"></div>を挿入
+    $("body").append('<div id="modal-bg"></div>');
+    //画面中央を計算する関数を実行
+    modalResize();
+    body = $("#body").val();
+    count -= 10;
+    console.log(count);
+    console.log(body);
+    $.ajax({
+      url: '/episodes/preview/previous',
+      type:'GET',
+      data: {text : body, book_id : gon.book_id, epi_start : count},
+      dataType: 'html',
+    }).done(function(data) {
+     console.log("previous更新できました。");
+     $('#preview-contents').html(data);
+   })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      console.log("XMLHttpRequest : " + jqXHR.status);
+      console.log("textStatus : " + textStatus);
+      console.log("errorThrown : " + errorThrown)
+    })
+    .always(function() {
+     console.log("finish");
+   })
+    //モーダル表示関数を呼ぶ
+    modal_show();
+  });
+
   function modalResize(){
     var w = $(window).width();
     var h = $(window).height();

@@ -1,0 +1,21 @@
+<h2>検索結果</h2>
+<table class="table">
+   <thead>
+     <tr>
+       <th>ユーザーネーム</th>
+       <th>プロフィール画像</th>
+     </tr>
+   </thead>
+   <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.user_name %></td>
+      <td>
+        <%= link_to mybook_path(user) do %>
+        <%= attachment_image_tag user, :user_img, size: '200x200' %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

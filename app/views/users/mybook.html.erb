@@ -1,22 +1,24 @@
 <div class="mt-5 col-10 mx-auto" style="width: 100%;">
-  <h1><i class="fa fa-book" aria-hidden="true"></i>マイブック</h1>
+  <h1><i class="fa fa-book" aria-hidden="true"></i><%= @user.user_name %>のマイブック</h1>
 
   <table class="table table-bordered myword-table">
     <thead >
       <tr>
         <th>本の表紙</th>
         <th>本のタイトル</th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @user_books.each do |book| %>
       <tr>
         <td>
+          <%= link_to book_path(book) do %>
           <%= attachment_image_tag book, :cover_img, size: '150x200' %>
+          <% end %>
         </td>
         <td> <%= book.book_title %> </td>
+
+        <% if current_user == @user %>
         <td>
           <%= link_to edit_book_path(book) do %>
           <button type="button" class="btn btn-success">本を編集</button>
@@ -27,12 +29,15 @@
           <button type="button" class="btn btn-danger">本を削除</button>
           <% end %>
         </td>
+        <% end %>
+
       </tr>
       <% end %>
     </tbody>
 
+    <% if current_user == @user %>
     <%= link_to new_book_path do %>
     <button type="button" class="btn btn-success btn-lg btn-block">新しく本を追加する</button>
-
+    <% end %>
     <% end %>
   </div>

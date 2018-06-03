@@ -56,7 +56,8 @@ class UsersController < ApplicationController
   end
 
   def mybook
-    @user_books = current_user.books
+    @user = User.find(params[:id])
+    @user_books = @user.books
   end
 
   def update

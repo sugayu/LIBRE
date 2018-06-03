@@ -41,9 +41,13 @@
           <div class="text-color">Books</div>
           <% end %>
         </li>
+
+        <%= link_to search_path, class:"nav-link mx-2"  do %>
         <li class="nav-item">
-          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+          <i class="fa fa-search text-color" aria-hidden="true"></i>
         </li>
+        <% end %>
+
       </ul>
     </div>
   </nav>
@@ -87,9 +91,13 @@
           login
           <% end %>
         </li>  
+
+        <%= link_to search_path, class:"nav-link mx-2"  do %>
         <li class="nav-item">
-          <a class="nav-link text-color" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+          <i class="fa fa-search" aria-hidden="true"></i>
         </li>
+        <% end %>
+
       </ul>
     </div>
   </nav>
