@@ -26,12 +26,13 @@ class BooksController < ApplicationController
     book.book_delete_flg = 0
     book.save
     flash[:notice] = "本を追加しました！"
-    redirect_to mybook_path
+    redirect_to mybook_path(current_user)
   end
 
   def destroy
     book = Book.find(params[:id])
-    book.destroy
+    book.book_delete_flg = true
+    book.save
     flash[:notice] = "本を削除しました！"
     redirect_to mybook_path(current_user)
   end

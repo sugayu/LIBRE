@@ -10,9 +10,11 @@
   <div class=" mx-auto my-5 col-10 bookshelf clearfix">
     <% @books.each do |book| %>
     <%= link_to book_path(book) do %>
+    <% if book.book_delete_flg == false %>
     <div class="book-item ">
       <%= attachment_image_tag book, :cover_img, size: '150x200' %>
     </div>
+    <% end %>
     <% end %>
     <% end %>
   </div>
