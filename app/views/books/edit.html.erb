@@ -14,7 +14,11 @@
       <% @episodes.each do |epi| %>
       <tr>
         <td>第<%= count %>話</td>
-        <td><%= epi.epi_title %></td>
+        <td>
+          <%= link_to book_episode_path(@book, epi) do %>
+          <div style="color: black;"><%= epi.epi_title %></div>
+          <% end %>
+        </td>
         <td>
           <%= link_to edit_book_episode_path(@book, epi) do %>
           <button type="button" class="btn btn-success">話の編集</button>
