@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LIBRE</title>
+  <title>LIVRE</title>
   <%= csrf_meta_tags %>
 
   <!-- gonを使うための記述 -->
@@ -19,7 +19,7 @@
   <!-- ユーザーログイン時 header -->
   <nav class="navbar navbar-expand-lg" style="height: 60px; background-color: #3F51B5;">
     <%= link_to top_path do %>
-    <div class="header-icon">LIBRE</div>
+    <div class="header-icon">LIVRE</div>
     <% end %>
     <div class="user-name"><%= current_user.user_name %>でログイン中</div>
 
@@ -54,7 +54,7 @@
   <% elsif admin_signed_in? %>
   <!-- 管理者ログイン時 header -->
   <nav class="navbar navbar-expand-lg" style="height: 60px; background-color: #3F51B5;">
-    <a class="navbar-brand text-color" href="#" class="header-web-font">LIBRE</a>
+    <a class="navbar-brand text-color" href="#" class="header-web-font">LIVRE</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">
@@ -72,7 +72,7 @@
 
   <!-- ユーザーログアウト時ヘッダー（ゲスト） -->
   <nav class="navbar navbar-expand-lg" style="height: 60px; background-color: #3F51B5;">
-    <a class="navbar-brand text-color" href="#" class="header-web-font">LIBRE</a>
+    <a class="navbar-brand text-color" href="#" class="header-web-font">LIVRE</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-md-auto">
         <li class="nav-item">

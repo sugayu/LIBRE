@@ -1,5 +1,5 @@
 <div class="mt-5 col-10 mx-auto" style="width: 100%;">
-  <p><i class="fa fa-user" aria-hidden="true"></i><%= @user.user_name %>ーーー<%= @book.book_title %>の話一覧</p>
+  <h1><i class="fa fa-user" aria-hidden="true"></i><%= @user.user_name %>ーー<%= @book.book_title %>のエピソード一覧</h1>
   <div class="spine-contents clearfix">
     <% count = 1 %>
     <% @book.episodes.each do |epi| %>
